@@ -1,0 +1,144 @@
+{
+ "model": "claude-sonnet-5",
+ "gold_set": {
+  "n": 42,
+  "authored": true,
+  "note": "Hand-labelled by the author across all 42 activities. Agreement with one careful reading, not with an external ground truth."
+ },
+ "coverage": {
+  "activities": 0.16666666666666666,
+  "events": 0.407812281670231,
+  "decided_by_taxonomy": 7,
+  "sent_to_model": 35,
+  "total": 42
+ },
+ "overall": {
+  "n": 42,
+  "accuracy": 0.7857142857142857,
+  "recall": {
+   "transactional": 0.7857142857142857,
+   "judgment": 0.7857142857142857
+  },
+  "precision": {
+   "transactional": 0.88,
+   "judgment": 0.6470588235294118
+  },
+  "confusion": {
+   "judgment->judgment": 11,
+   "judgment->transactional": 3,
+   "transactional->judgment": 6,
+   "transactional->transactional": 22
+  },
+  "error_rate": {
+   "transactional": 0.2142857142857143,
+   "judgment": 0.2142857142857143
+  }
+ },
+ "stage_1_taxonomy": {
+  "n": 7,
+  "accuracy": 0.7142857142857143,
+  "recall": {
+   "transactional": 1.0,
+   "judgment": 0.0
+  },
+  "precision": {
+   "transactional": 0.7142857142857143,
+   "judgment": null
+  },
+  "confusion": {
+   "judgment->transactional": 2,
+   "transactional->transactional": 5
+  },
+  "error_rate": {
+   "transactional": 0.0,
+   "judgment": 1.0
+  }
+ },
+ "stage_2_model": {
+  "n": 35,
+  "accuracy": 0.8,
+  "recall": {
+   "transactional": 0.7391304347826086,
+   "judgment": 0.9166666666666666
+  },
+  "precision": {
+   "transactional": 0.9444444444444444,
+   "judgment": 0.6470588235294118
+  },
+  "confusion": {
+   "judgment->judgment": 11,
+   "judgment->transactional": 1,
+   "transactional->judgment": 6,
+   "transactional->transactional": 17
+  },
+  "error_rate": {
+   "transactional": 0.26086956521739135,
+   "judgment": 0.08333333333333337
+  }
+ },
+ "disagreements": [
+  {
+   "activity": "Cancel Invoice Receipt",
+   "gold": "judgment",
+   "predicted": "transactional",
+   "source": "taxonomy",
+   "reason": "keyword hit"
+  },
+  {
+   "activity": "Cancel Subsequent Invoice",
+   "gold": "judgment",
+   "predicted": "transactional",
+   "source": "taxonomy",
+   "reason": "keyword hit"
+  },
+  {
+   "activity": "Change Delivery Indicator",
+   "gold": "transactional",
+   "predicted": "judgment",
+   "source": "model",
+   "reason": "Many users manually decide delivery status changes, no batch automation"
+  },
+  {
+   "activity": "Change Quantity",
+   "gold": "transactional",
+   "predicted": "judgment",
+   "source": "model",
+   "reason": "Manual quantity revisions by many users require case-by-case decisions"
+  },
+  {
+   "activity": "Change Rejection Indicator",
+   "gold": "transactional",
+   "predicted": "judgment",
+   "source": "model",
+   "reason": "Manual decision to reject/unreject, low volume, no automation"
+  },
+  {
+   "activity": "Change Storage Location",
+   "gold": "transactional",
+   "predicted": "judgment",
+   "source": "model",
+   "reason": "Manual users decide correct storage location, varies by case"
+  },
+  {
+   "activity": "Create Purchase Requisition Item",
+   "gold": "transactional",
+   "predicted": "judgment",
+   "source": "model",
+   "reason": "Many distinct users decide what and how much to requisition"
+  },
+  {
+   "activity": "Delete Purchase Order Item",
+   "gold": "transactional",
+   "predicted": "judgment",
+   "source": "model",
+   "reason": "Deciding to delete a PO item requires human evaluation, not automated"
+  },
+  {
+   "activity": "SRM: Transfer Failed (E.Sys.)",
+   "gold": "judgment",
+   "predicted": "transactional",
+   "source": "model",
+   "reason": "System error status transfer, single actor, rule-based processing step"
+  }
+ ]
+}

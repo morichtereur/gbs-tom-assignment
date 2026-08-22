@@ -1,0 +1,361 @@
+{
+ "draws": 200,
+ "seed": 20260822,
+ "infeasible_draws": 0,
+ "stable_threshold": 0.75,
+ "classifier_error_rate": {
+  "transactional": 0.2142857142857143,
+  "judgment": 0.2142857142857143
+ },
+ "bands": {
+  "pl:Krak\u00f3w": [
+   "pl:Krak\u00f3w"
+  ],
+  "pl:Warsaw": [
+   "pl:Warsaw"
+  ],
+  "pl:Wroc\u0142aw": [
+   "pl:Wroc\u0142aw"
+  ],
+  "pl:Pozna\u0144": [
+   "pl:Pozna\u0144"
+  ],
+  "za:Johannesburg": [
+   "za:Johannesburg"
+  ],
+  "in:Bangalore": [
+   "in:Bangalore",
+   "in:Chennai",
+   "in:Mumbai",
+   "in:Pune"
+  ],
+  "in:Hyderabad": [
+   "in:Hyderabad"
+  ],
+  "br:S\u00e3o Paulo": [
+   "br:S\u00e3o Paulo"
+  ]
+ },
+ "activities": {
+  "Block Purchase Order Item": {
+   "modal_unit": "captive@in:Hyderabad",
+   "modal_share": 0.485,
+   "stable": false,
+   "distribution": {
+    "captive@in:Hyderabad": 0.485,
+    "captive@in:Bangalore": 0.415,
+    "provider@in:Hyderabad": 0.055,
+    "provider@in:Bangalore": 0.02,
+    "provider@pl:Pozna\u0144": 0.02,
+    "provider@pl:Wroc\u0142aw": 0.005
+   },
+   "draws": 200
+  },
+  "Cancel Goods Receipt": {
+   "modal_unit": "captive@in:Hyderabad",
+   "modal_share": 0.535,
+   "stable": false,
+   "distribution": {
+    "captive@in:Hyderabad": 0.535,
+    "captive@in:Bangalore": 0.465
+   },
+   "draws": 200
+  },
+  "Cancel Invoice Receipt": {
+   "modal_unit": "automated",
+   "modal_share": 1.0,
+   "stable": true,
+   "distribution": {
+    "automated": 1.0
+   },
+   "draws": 200
+  },
+  "Cancel Subsequent Invoice": {
+   "modal_unit": "provider@pl:Pozna\u0144",
+   "modal_share": 0.88,
+   "stable": true,
+   "distribution": {
+    "provider@pl:Pozna\u0144": 0.88,
+    "provider@pl:Wroc\u0142aw": 0.12
+   },
+   "draws": 200
+  },
+  "Change Approval for Purchase Order": {
+   "modal_unit": "provider@pl:Wroc\u0142aw",
+   "modal_share": 0.585,
+   "stable": false,
+   "distribution": {
+    "provider@pl:Wroc\u0142aw": 0.585,
+    "provider@pl:Pozna\u0144": 0.415
+   },
+   "draws": 200
+  },
+  "Change Currency": {
+   "modal_unit": "provider@pl:Wroc\u0142aw",
+   "modal_share": 0.745,
+   "stable": false,
+   "distribution": {
+    "provider@pl:Wroc\u0142aw": 0.745,
+    "provider@pl:Pozna\u0144": 0.255
+   },
+   "draws": 200
+  },
+  "Change Delivery Indicator": {
+   "modal_unit": "captive@in:Hyderabad",
+   "modal_share": 0.54,
+   "stable": false,
+   "distribution": {
+    "captive@in:Hyderabad": 0.54,
+    "captive@in:Bangalore": 0.46
+   },
+   "draws": 200
+  },
+  "Change Final Invoice Indicator": {
+   "modal_unit": "captive@in:Hyderabad",
+   "modal_share": 0.545,
+   "stable": false,
+   "distribution": {
+    "captive@in:Hyderabad": 0.545,
+    "captive@in:Bangalore": 0.455
+   },
+   "draws": 200
+  },
+  "Change Price": {
+   "modal_unit": "provider@pl:Wroc\u0142aw",
+   "modal_share": 0.775,
+   "stable": true,
+   "distribution": {
+    "provider@pl:Wroc\u0142aw": 0.775,
+    "provider@pl:Pozna\u0144": 0.225
+   },
+   "draws": 200
+  },
+  "Change Quantity": {
+   "modal_unit": "provider@pl:Wroc\u0142aw",
+   "modal_share": 0.75,
+   "stable": true,
+   "distribution": {
+    "provider@pl:Wroc\u0142aw": 0.75,
+    "provider@pl:Pozna\u0144": 0.25
+   },
+   "draws": 200
+  },
+  "Change Rejection Indicator": {
+   "modal_unit": "captive@in:Hyderabad",
+   "modal_share": 0.375,
+   "stable": false,
+   "distribution": {
+    "captive@in:Hyderabad": 0.375,
+    "captive@in:Bangalore": 0.37,
+    "provider@pl:Wroc\u0142aw": 0.11,
+    "provider@pl:Pozna\u0144": 0.105,
+    "provider@in:Hyderabad": 0.025,
+    "provider@in:Bangalore": 0.015
+   },
+   "draws": 200
+  },
+  "Change Storage Location": {
+   "modal_unit": "captive@in:Hyderabad",
+   "modal_share": 0.53,
+   "stable": false,
+   "distribution": {
+    "captive@in:Hyderabad": 0.53,
+    "captive@in:Bangalore": 0.47
+   },
+   "draws": 200
+  },
+  "Change payment term": {
+   "modal_unit": "provider@pl:Pozna\u0144",
+   "modal_share": 0.585,
+   "stable": false,
+   "distribution": {
+    "provider@pl:Pozna\u0144": 0.585,
+    "provider@pl:Wroc\u0142aw": 0.415
+   },
+   "draws": 200
+  },
+  "Clear Invoice": {
+   "modal_unit": "captive@in:Hyderabad",
+   "modal_share": 0.53,
+   "stable": false,
+   "distribution": {
+    "captive@in:Hyderabad": 0.53,
+    "captive@in:Bangalore": 0.46,
+    "provider@in:Hyderabad": 0.01
+   },
+   "draws": 200
+  },
+  "Create Purchase Order Item": {
+   "modal_unit": "captive@in:Hyderabad",
+   "modal_share": 0.53,
+   "stable": false,
+   "distribution": {
+    "captive@in:Hyderabad": 0.53,
+    "captive@in:Bangalore": 0.47
+   },
+   "draws": 200
+  },
+  "Create Purchase Requisition Item": {
+   "modal_unit": "automated",
+   "modal_share": 1.0,
+   "stable": true,
+   "distribution": {
+    "automated": 1.0
+   },
+   "draws": 200
+  },
+  "Delete Purchase Order Item": {
+   "modal_unit": "provider@pl:Wroc\u0142aw",
+   "modal_share": 0.6,
+   "stable": false,
+   "distribution": {
+    "provider@pl:Wroc\u0142aw": 0.6,
+    "provider@pl:Pozna\u0144": 0.4
+   },
+   "draws": 200
+  },
+  "Reactivate Purchase Order Item": {
+   "modal_unit": "captive@in:Hyderabad",
+   "modal_share": 0.375,
+   "stable": false,
+   "distribution": {
+    "captive@in:Hyderabad": 0.375,
+    "captive@in:Bangalore": 0.37,
+    "provider@pl:Wroc\u0142aw": 0.11,
+    "provider@pl:Pozna\u0144": 0.105,
+    "provider@in:Hyderabad": 0.025,
+    "provider@in:Bangalore": 0.015
+   },
+   "draws": 200
+  },
+  "Receive Order Confirmation": {
+   "modal_unit": "automated",
+   "modal_share": 0.9,
+   "stable": true,
+   "distribution": {
+    "automated": 0.9,
+    "provider@pl:Pozna\u0144": 0.1
+   },
+   "draws": 200
+  },
+  "Record Goods Receipt": {
+   "modal_unit": "captive@in:Hyderabad",
+   "modal_share": 0.53,
+   "stable": false,
+   "distribution": {
+    "captive@in:Hyderabad": 0.53,
+    "captive@in:Bangalore": 0.47
+   },
+   "draws": 200
+  },
+  "Record Invoice Receipt": {
+   "modal_unit": "captive@in:Hyderabad",
+   "modal_share": 0.44,
+   "stable": false,
+   "distribution": {
+    "captive@in:Hyderabad": 0.44,
+    "captive@in:Bangalore": 0.425,
+    "provider@in:Hyderabad": 0.09,
+    "provider@in:Bangalore": 0.035,
+    "captive@za:Johannesburg": 0.01
+   },
+   "draws": 200
+  },
+  "Record Service Entry Sheet": {
+   "modal_unit": "captive@in:Hyderabad",
+   "modal_share": 0.53,
+   "stable": false,
+   "distribution": {
+    "captive@in:Hyderabad": 0.53,
+    "captive@in:Bangalore": 0.47
+   },
+   "draws": 200
+  },
+  "Record Subsequent Invoice": {
+   "modal_unit": "captive@in:Hyderabad",
+   "modal_share": 0.535,
+   "stable": false,
+   "distribution": {
+    "captive@in:Hyderabad": 0.535,
+    "captive@in:Bangalore": 0.45,
+    "provider@in:Hyderabad": 0.01,
+    "provider@pl:Pozna\u0144": 0.005
+   },
+   "draws": 200
+  },
+  "Release Purchase Order": {
+   "modal_unit": "provider@pl:Wroc\u0142aw",
+   "modal_share": 0.515,
+   "stable": false,
+   "distribution": {
+    "provider@pl:Wroc\u0142aw": 0.515,
+    "provider@pl:Pozna\u0144": 0.355,
+    "captive@in:Hyderabad": 0.06,
+    "captive@in:Bangalore": 0.055,
+    "provider@in:Bangalore": 0.01,
+    "provider@in:Hyderabad": 0.005
+   },
+   "draws": 200
+  },
+  "Release Purchase Requisition": {
+   "modal_unit": "captive@in:Hyderabad",
+   "modal_share": 0.53,
+   "stable": false,
+   "distribution": {
+    "captive@in:Hyderabad": 0.53,
+    "captive@in:Bangalore": 0.465,
+    "provider@pl:Pozna\u0144": 0.005
+   },
+   "draws": 200
+  },
+  "Remove Payment Block": {
+   "modal_unit": "automated",
+   "modal_share": 1.0,
+   "stable": true,
+   "distribution": {
+    "automated": 1.0
+   },
+   "draws": 200
+  },
+  "SRM: Transfer Failed (E.Sys.)": {
+   "modal_unit": "captive@in:Hyderabad",
+   "modal_share": 0.52,
+   "stable": false,
+   "distribution": {
+    "captive@in:Hyderabad": 0.52,
+    "captive@in:Bangalore": 0.46,
+    "provider@pl:Pozna\u0144": 0.02
+   },
+   "draws": 200
+  },
+  "Set Payment Block": {
+   "modal_unit": "captive@in:Hyderabad",
+   "modal_share": 0.435,
+   "stable": false,
+   "distribution": {
+    "captive@in:Hyderabad": 0.435,
+    "captive@in:Bangalore": 0.425,
+    "provider@in:Hyderabad": 0.09,
+    "provider@in:Bangalore": 0.035,
+    "captive@za:Johannesburg": 0.01,
+    "provider@pl:Pozna\u0144": 0.005
+   },
+   "draws": 200
+  },
+  "Update Order Confirmation": {
+   "modal_unit": "automated",
+   "modal_share": 0.895,
+   "stable": true,
+   "distribution": {
+    "automated": 0.895,
+    "provider@pl:Pozna\u0144": 0.105
+   },
+   "draws": 200
+  }
+ },
+ "summary": {
+  "stable": 8,
+  "unstable": 21,
+  "total": 29
+ }
+}

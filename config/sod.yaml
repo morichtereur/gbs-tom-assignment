@@ -1,0 +1,53 @@
+# Segregation of duties.
+#
+# The rule form is ported from finance-close-control-agent, CHK-03: where one
+# unit both prepares and approves, that is a control failure irrespective of
+# amount. Nothing about that rule is re-derived here — only its subject changes,
+# from a user id to an organisational unit, because a target operating model
+# decides units and not people.
+#
+#   upstream   src/fcca/controls/journal_checks.py::check_segregation_of_duties
+#              policies/journal_entry_policy.md section 2
+#
+# The pairs below are authored. The rule is ported; the P2P pairs it applies to
+# are a judgement this study makes, and a reader should argue with the list
+# rather than with the constraint. `make ablation` switches the whole constraint
+# off and reports what moves.
+#
+# A unit is a (delivery model, location) pair. Two activities breach if they
+# share both. Two captive teams in different cities do not breach; a captive and
+# a provider team in the same city do not breach.
+
+pairs:
+  - [Create Purchase Requisition Item, Release Purchase Requisition]
+    # Preparer and approver of the demand. The direct analogue of CHK-03.
+
+  - [Create Purchase Order Item, Release Purchase Order]
+    # Preparer and approver of the commitment.
+
+  - [Create Purchase Order Item, Change Approval for Purchase Order]
+    # Whoever raises a line must not be the one who re-approves it after a change.
+
+  - [Record Goods Receipt, Record Invoice Receipt]
+    # The two sides of the three-way match. One unit holding both can confirm a
+    # receipt to clear its own invoice.
+
+  - [Record Invoice Receipt, Clear Invoice]
+    # Recording the obligation and releasing the payment. The P2P form of
+    # preparer-approver, and the pair with the largest fraud exposure.
+
+  - [Record Invoice Receipt, Remove Payment Block]
+    # A block exists to stop an invoice the system doubts. The unit that posted
+    # it must not be the unit that decides the doubt was unfounded.
+
+  - [Set Payment Block, Remove Payment Block]
+    # Placing and lifting the same hold.
+
+  - [Change Price, Clear Invoice]
+    # Changing what is owed and paying it.
+
+  - [Change payment term, Clear Invoice]
+    # As above, on timing rather than amount.
+
+  - [Block Purchase Order Item, Reactivate Purchase Order Item]
+    # Placing and lifting the same hold, on the order rather than the payment.

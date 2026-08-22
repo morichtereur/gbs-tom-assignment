@@ -1,0 +1,279 @@
+{
+ "model": "claude-sonnet-5",
+ "taxonomy_source": "gbs-agentic-shift/src/taxonomy.py",
+ "coverage": {
+  "activities": 0.16666666666666666,
+  "events": 0.407812281670231,
+  "decided_by_taxonomy": 7,
+  "sent_to_model": 35,
+  "total": 42
+ },
+ "labels": {
+  "Block Purchase Order Item": {
+   "label": "judgment",
+   "source": "model",
+   "reason": "Deciding to block an order requires evaluating reasons, not automatic",
+   "hits": []
+  },
+  "Cancel Goods Receipt": {
+   "label": "judgment",
+   "source": "model",
+   "reason": "Reversing receipts requires evaluating error cause, mostly manual, many distinct users",
+   "hits": []
+  },
+  "Cancel Invoice Receipt": {
+   "label": "transactional",
+   "source": "taxonomy",
+   "reason": "keyword hit",
+   "hits": [
+    "invoice"
+   ]
+  },
+  "Cancel Subsequent Invoice": {
+   "label": "transactional",
+   "source": "taxonomy",
+   "reason": "keyword hit",
+   "hits": [
+    "invoice"
+   ]
+  },
+  "Change Approval for Purchase Order": {
+   "label": "judgment",
+   "source": "model",
+   "reason": "Approval decisions vary by human reviewers, no batch automation",
+   "hits": []
+  },
+  "Change Currency": {
+   "label": "judgment",
+   "source": "model",
+   "reason": "Manual currency changes by multiple users, no automation involved",
+   "hits": []
+  },
+  "Change Delivery Indicator": {
+   "label": "judgment",
+   "source": "model",
+   "reason": "Many users manually decide delivery status changes, no batch automation",
+   "hits": []
+  },
+  "Change Final Invoice Indicator": {
+   "label": "transactional",
+   "source": "taxonomy",
+   "reason": "keyword hit",
+   "hits": [
+    "invoice"
+   ]
+  },
+  "Change Price": {
+   "label": "judgment",
+   "source": "model",
+   "reason": "Price changes require human evaluation, no batch automation, many users involved",
+   "hits": []
+  },
+  "Change Quantity": {
+   "label": "judgment",
+   "source": "model",
+   "reason": "Manual quantity revisions by many users require case-by-case decisions",
+   "hits": []
+  },
+  "Change Rejection Indicator": {
+   "label": "judgment",
+   "source": "model",
+   "reason": "Manual decision to reject/unreject, low volume, no automation",
+   "hits": []
+  },
+  "Change Storage Location": {
+   "label": "judgment",
+   "source": "model",
+   "reason": "Manual users decide correct storage location, varies by case",
+   "hits": []
+  },
+  "Change payment term": {
+   "label": "judgment",
+   "source": "model",
+   "reason": "Deciding new payment term requires human evaluation, not automated batch execution",
+   "hits": []
+  },
+  "Clear Invoice": {
+   "label": "transactional",
+   "source": "taxonomy",
+   "reason": "keyword hit",
+   "hits": [
+    "invoice"
+   ]
+  },
+  "Create Purchase Order Item": {
+   "label": "transactional",
+   "source": "model",
+   "reason": "Standard rule-based data entry, high volume, mostly manual but repetitive process",
+   "hits": []
+  },
+  "Create Purchase Requisition Item": {
+   "label": "judgment",
+   "source": "model",
+   "reason": "Many distinct users decide what and how much to requisition",
+   "hits": []
+  },
+  "Delete Purchase Order Item": {
+   "label": "judgment",
+   "source": "model",
+   "reason": "Deciding to delete a PO item requires human evaluation, not automated",
+   "hits": []
+  },
+  "Reactivate Purchase Order Item": {
+   "label": "judgment",
+   "source": "model",
+   "reason": "51 users decide case-by-case whether reactivating item is appropriate",
+   "hits": []
+  },
+  "Receive Order Confirmation": {
+   "label": "transactional",
+   "source": "model",
+   "reason": "Routine logging of confirmations, mostly automated, minimal discretion required per event",
+   "hits": []
+  },
+  "Record Goods Receipt": {
+   "label": "transactional",
+   "source": "model",
+   "reason": "Rule-based receipt posting, mostly consistent process across many users",
+   "hits": []
+  },
+  "Record Invoice Receipt": {
+   "label": "transactional",
+   "source": "taxonomy",
+   "reason": "keyword hit",
+   "hits": [
+    "invoice"
+   ]
+  },
+  "Record Service Entry Sheet": {
+   "label": "transactional",
+   "source": "model",
+   "reason": "Single user, standardized recording process, no exception evaluation needed",
+   "hits": []
+  },
+  "Record Subsequent Invoice": {
+   "label": "transactional",
+   "source": "taxonomy",
+   "reason": "keyword hit",
+   "hits": [
+    "invoice"
+   ]
+  },
+  "Release Purchase Order": {
+   "label": "judgment",
+   "source": "model",
+   "reason": "Manual approval decision by multiple users, no batch automation",
+   "hits": []
+  },
+  "Release Purchase Requisition": {
+   "label": "judgment",
+   "source": "model",
+   "reason": "Approval decision requiring authority check, many distinct approvers involved",
+   "hits": []
+  },
+  "Remove Payment Block": {
+   "label": "judgment",
+   "source": "model",
+   "reason": "Deciding to unblock payment requires evaluating exception, mostly manual, human review",
+   "hits": []
+  },
+  "SRM: Awaiting Approval": {
+   "label": "transactional",
+   "source": "model",
+   "reason": "Mostly batch-processed status wait, rule-driven, not individual judgment-based approval decision",
+   "hits": []
+  },
+  "SRM: Change was Transmitted": {
+   "label": "transactional",
+   "source": "model",
+   "reason": "Fully automated batch process, single user, no discretionary decisions made",
+   "hits": []
+  },
+  "SRM: Complete": {
+   "label": "transactional",
+   "source": "model",
+   "reason": "Mostly batch-run, high volume, low user variance indicates rule-based completion step",
+   "hits": []
+  },
+  "SRM: Created": {
+   "label": "transactional",
+   "source": "model",
+   "reason": "Mostly batch-created records; standardized system creation, minimal human judgment involved",
+   "hits": []
+  },
+  "SRM: Deleted": {
+   "label": "transactional",
+   "source": "model",
+   "reason": "Fully automated, single batch user, no human decision involved",
+   "hits": []
+  },
+  "SRM: Document Completed": {
+   "label": "transactional",
+   "source": "model",
+   "reason": "Mostly batch-executed, rule-based completion step with minimal human judgment involved",
+   "hits": []
+  },
+  "SRM: Held": {
+   "label": "transactional",
+   "source": "model",
+   "reason": "Single batch user, fully automated, fixed rule-based hold processing",
+   "hits": []
+  },
+  "SRM: In Transfer to Execution Syst.": {
+   "label": "transactional",
+   "source": "model",
+   "reason": "Mostly batch-executed system transfer step, rule-based and repetitive processing",
+   "hits": []
+  },
+  "SRM: Incomplete": {
+   "label": "transactional",
+   "source": "model",
+   "reason": "Fully automated batch process, single user, no discretionary decisions made",
+   "hits": []
+  },
+  "SRM: Ordered": {
+   "label": "transactional",
+   "source": "model",
+   "reason": "Fully automated batch process, single user, no discretionary decisions made",
+   "hits": []
+  },
+  "SRM: Transaction Completed": {
+   "label": "transactional",
+   "source": "model",
+   "reason": "System-generated status marking completion, no judgment exercised despite manual triggering",
+   "hits": []
+  },
+  "SRM: Transfer Failed (E.Sys.)": {
+   "label": "transactional",
+   "source": "model",
+   "reason": "System error status transfer, single actor, rule-based processing step",
+   "hits": []
+  },
+  "Set Payment Block": {
+   "label": "judgment",
+   "source": "model",
+   "reason": "Blocking payment requires deciding based on dispute or exception reason",
+   "hits": []
+  },
+  "Update Order Confirmation": {
+   "label": "transactional",
+   "source": "model",
+   "reason": "Rule-based update of order confirmation, mostly manual but repetitive process",
+   "hits": []
+  },
+  "Vendor creates debit memo": {
+   "label": "transactional",
+   "source": "model",
+   "reason": "Single actor, standardized process, no evidence of case-by-case decision making",
+   "hits": []
+  },
+  "Vendor creates invoice": {
+   "label": "transactional",
+   "source": "taxonomy",
+   "reason": "keyword hit",
+   "hits": [
+    "invoice"
+   ]
+  }
+ }
+}

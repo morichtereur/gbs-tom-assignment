@@ -1,0 +1,195 @@
+# The model — every constraint, weight and threshold that decides the answer.
+#
+# Nothing here is measured. It is the set of choices a target operating model
+# is normally argued about in a workshop, written down where they can be
+# switched off one at a time (`make ablation`) and moved 10,000 times
+# (`make stability`).
+
+scope:
+  process: p2p
+  # The log covers purchase orders submitted in 2018 across 251,734 line items.
+  # It is treated as one year of volume. Everything annual below rests on that.
+  period_months: 12
+  # Productive hours per FTE-year after leave, training and idle time.
+  productive_hours_per_fte_year: 1600
+  # Paid hours a monthly wage buys. ILOSTAT earnings are monthly, so this is
+  # what turns them into an hourly rate.
+  paid_hours_per_month: 160
+
+# --- currency --------------------------------------------------------------
+# The brief asks for the tipping point in CHF per handoff. It is reported in
+# USD instead, because the upstream wage panel is USD and the tipping point is
+# a ratio between coordination cost and wage cost. Converting one side would
+# add an unmeasured FX assumption to the headline number and buy nothing.
+currency: USD
+
+# --- delivery models -------------------------------------------------------
+# `locations` names which of the location classes each model may sit in.
+#   hq      the retained anchor, a country-level market from the upstream panel
+#   city    any of the eleven evidenced GBS cities
+#   none    no location at all
+delivery_models:
+  retained:
+    locations: hq
+    wage_multiplier: 1.0
+    # A retained team is inside the business, so it carries no separate site.
+    site_overhead: false
+    why: Work the business does not hand over. Sits where the business sits.
+  captive:
+    locations: city
+    # Own centre: wage plus the employer cost of running it, before site fixed
+    # costs, which are handled by the minimum-site constraint instead.
+    wage_multiplier: 1.15
+    site_overhead: true
+    why: Own shared-services centre. Cheap labour, but you carry the site.
+  provider:
+    locations: city
+    # A provider bills a rate, not a wage. The multiplier is the whole
+    # difference between the two and it is the number this model is least sure
+    # about, which is why it is resampled hardest.
+    wage_multiplier: 1.45
+    # A provider already has the site. This asymmetry is the only thing that
+    # makes the minimum-site-size constraint bite differently by model.
+    site_overhead: false
+    why: Third-party BPO. You pay a margin and stop carrying the floor.
+  automated:
+    locations: none
+    wage_multiplier: 0.0
+    site_overhead: false
+    why: Software does it. Priced per event, not per hour.
+
+# The retained anchor. `hq` in gbs-location-selection is Zurich, and Switzerland
+# is a scored market there with a measured wage, so this reuses that panel
+# rather than introducing a twelfth location with an invented cost.
+#
+# This is a departure from the brief, which names eleven cities and four
+# delivery models but gives retained work nowhere to sit. Retained work is by
+# definition not offshored; putting it in Bangalore would make the word mean
+# nothing. Stated here rather than absorbed silently.
+retained_location: ch
+
+# --- automation ------------------------------------------------------------
+automation:
+  # An activity may be automated only where the log already shows it running in
+  # batch above this floor. That makes automatability evidenced rather than
+  # asserted: `Clear Invoice` runs 0% batch across 24 users and therefore
+  # cannot be automated in this model, however much a slide would like it to.
+  evidence_floor: 0.03
+  # Run cost per thousand events — licence, infrastructure and support.
+  cost_per_1k_events_usd: 40
+  # Automation does not remove all the labour. This share of handling time comes
+  # back as exception work, and it comes back to the retained organisation,
+  # because that is where an exception with no owner ends up.
+  residual_labour_share: 0.15
+
+# --- constraints -----------------------------------------------------------
+# Each has an `id` so `make ablation` can switch exactly one off and report
+# what moved. The flag is `enabled` and not `on`, because YAML 1.1 reads a
+# bare `on` key as the boolean True and the constraint then silently never
+# fires. That cost one wrong headline number before it was caught.
+constraints:
+
+  - id: sod
+    enabled: true
+    why: Activity pairs that cannot share a unit. Pairs in config/sod.yaml.
+
+  - id: min_site_size
+    enabled: true
+    # Below roughly this, a captive site does not carry its own overhead —
+    # management, facilities, HR, a local finance lead. A provider is exempt
+    # because the site already exists and is shared with other clients.
+    fte: 15
+    why: A captive site that cannot reach this headcount should not be opened.
+
+  - id: contact_coverage
+    enabled: true
+    # Activities flagged `contact` in config/activities.yaml need to overlap the
+    # headquarters working day and need somebody who can hold the conversation.
+    min_overlap_hours: 4.0
+    # Share of the city's postings that ask for a language beyond English.
+    # Measured upstream, per city. A contact activity needs a city above this.
+    min_language_share: 0.10
+    why: You cannot answer a supplier call from outside their working day.
+
+  - id: judgment_cap
+    enabled: true
+    # A city counts as a transactional hub where its measured posting mix is at
+    # least this transactional. Measured upstream, not declared here.
+    hub_transactional_threshold: 0.60
+    # In such a city, judgment FTE may not exceed this share of its total.
+    max_judgment_share: 0.35
+    why: Judgment work put into a processing hub is judgment work in name only.
+
+# --- objective -------------------------------------------------------------
+objective:
+  # Coordination cost charged every time two directly-following activities sit
+  # in different units. This is the number the reader drags.
+  #
+  # A handoff is one case arriving at a unit that was not already holding it:
+  # a queue, a context switch, and a partial re-read of what the previous unit
+  # did. Two to ten minutes of the receiving analyst's time is the honest span.
+  # Priced against the wage panel this study already carries:
+  #
+  #     2 min at the Indian clerical rate  ($1.74/h)   =  $0.06
+  #     10 min at the Polish clerical rate ($10.56/h)  =  $1.76
+  #     10 min at the Zurich clerical rate ($41.98/h)  =  $7.00
+  #
+  # The range below is set from that arithmetic and nothing else. It was fixed
+  # before the sweep was run, so the tipping point can land outside it — and if
+  # it does, that is the finding.
+  handoff_cost_usd: 1.50
+  defensible_range_usd: [0.25, 4.0]
+  # Many assignments cost exactly the same — a dozen activities are small
+  # enough that where they sit changes the bill by nothing at all. Without a
+  # stated preference the solver returns whichever tied optimum it happened to
+  # reach, and the answer appears to move when the reader changes the price
+  # even though nothing real changed.
+  #
+  # So a preference is declared: among assignments of equal cost, prefer the one
+  # using fewer distinct units. That is a real thing a target operating model
+  # wants — every extra unit is another interface to manage — and it is applied
+  # strictly after cost, never in place of it.
+  #
+  # Ties survive even that, so a last one is applied: a fixed ordering of the
+  # units. It carries no meaning whatsoever and is here for one reason, which is
+  # that the same input should give the same answer twice.
+  #
+  # Together these make the answer reproducible. They do not make it certain.
+  # Which activities are genuinely pinned by cost and which are merely placed by
+  # a tie-break is measured directly — `make forced` — and reported per activity,
+  # because an arbitrary position rendered as a confident one is the failure this
+  # study is about.
+  tie_break: fewest_units_then_fixed_order
+  # Self-transitions are the same activity repeating and never cross a unit.
+  # Excluded from the count rather than priced at zero, so the transition total
+  # in the results means what it says.
+  exclude_self_loops: true
+  # Edges touching a vendor or system activity are unavoidable whatever the
+  # assignment, so they are a constant. Excluded, and the excluded volume is
+  # reported.
+  exclude_unassignable: true
+
+# --- baseline --------------------------------------------------------------
+# The comparison the headline metric is against: the workshop answer. Everything
+# that can move, moves, to the single cheapest city that clears the constraints.
+baseline:
+  strategy: cheapest_viable_city
+  # What a workshop treats as immovable: approval authority and anything the
+  # constraints pin. Everything else goes offshore.
+  keep_retained: [Release Purchase Order, Change Approval for Purchase Order]
+  delivery_model: captive
+
+# --- stability -------------------------------------------------------------
+stability:
+  draws: 10000
+  seed: 20260822
+  # How far each resampled quantity may move. All uniform unless stated.
+  jitter:
+    handling_minutes: 0.30       # +/- 30% on every authored handling time
+    provider_multiplier: 0.15
+    captive_multiplier: 0.08
+    automation_cost: 0.40
+    handoff_cost: 0.50
+  # An activity whose assignment holds in fewer than this share of draws is
+  # reported as unstable and is not given a position.
+  stable_threshold: 0.75

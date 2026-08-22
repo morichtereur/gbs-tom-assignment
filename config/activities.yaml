@@ -1,0 +1,380 @@
+# Activity mapping — authored, not measured.
+#
+# Everything in this file is a judgement this study makes on top of the event
+# log. The log says which activities exist, how often they fire, how many
+# distinct users touch them and what share already runs in batch. It does not
+# say how long one takes, which wage group does it, or whether it involves
+# talking to a supplier. Those are the four things below, and they are here in
+# one file so a reader can disagree with a specific number instead of with the
+# conclusion.
+#
+# fields
+#   owner       buyer | vendor | system
+#               Only `buyer` activities enter the assignment. `vendor` is the
+#               supplier's own act and `system` is a workflow status change with
+#               no attributable performer — both are evidenced by the log
+#               carrying resource `NONE` or a single `batch_*` id, not asserted.
+#   isco        2 | 3 | 4 — ISCO-08 major group, the wage line this activity is
+#               costed on. ILOSTAT publishes no finer cut, so this is the
+#               mapping validation item 2 of the brief is about. Resampled.
+#   family      transactional | judgment — the hand label. This is the gold set
+#               the ported classifier is scored against; the pipeline does NOT
+#               read it. See eval/gold_activities.jsonl.
+#   minutes     handling time per event. Authored from ordinary P2P norms.
+#               Resampled in the stability run. The single largest unmeasured
+#               quantity in the model, and it is stated rather than footnoted.
+#   contact     true where the activity involves supplier or requester contact,
+#               which is what makes overlap and language binding constraints.
+#   why         one line. Required for every entry.
+
+activities:
+
+  # --- core flow -----------------------------------------------------------
+  - name: Create Purchase Requisition Item
+    owner: buyer
+    isco: 4
+    family: transactional
+    minutes: 6
+    contact: true
+    why: Requester-facing intake, keyed against a catalogue; clerical volume work.
+
+  - name: Create Purchase Order Item
+    owner: buyer
+    isco: 4
+    family: transactional
+    minutes: 5
+    contact: false
+    why: Conversion of an approved requisition; 185 users and 7.6% already batch.
+
+  - name: Record Goods Receipt
+    owner: buyer
+    isco: 4
+    family: transactional
+    minutes: 3
+    contact: false
+    why: Confirmation against a delivery note; the highest-volume clerical step.
+
+  - name: Record Service Entry Sheet
+    owner: buyer
+    isco: 4
+    family: transactional
+    minutes: 2
+    contact: false
+    why: Service equivalent of a goods receipt. The log carries no resource for
+         it, so its performer is inferred rather than observed — stated because
+         it is the second-largest volume in the model.
+
+  - name: Record Invoice Receipt
+    owner: buyer
+    isco: 4
+    family: transactional
+    minutes: 8
+    contact: false
+    why: Invoice entry and three-way match; the canonical AP clerk task.
+
+  - name: Clear Invoice
+    owner: buyer
+    isco: 4
+    family: transactional
+    minutes: 4
+    contact: false
+    why: Payment release against a matched invoice; 24 users, zero batch events.
+
+  # --- vendor-side ---------------------------------------------------------
+  - name: Vendor creates invoice
+    owner: vendor
+    isco: 4
+    family: transactional
+    minutes: 0
+    contact: false
+    why: The supplier's own act. Recorded in the log, not performed by the buyer.
+
+  - name: Vendor creates debit memo
+    owner: vendor
+    isco: 4
+    family: transactional
+    minutes: 0
+    contact: false
+    why: As above — supplier-side, cannot be assigned to a delivery model.
+
+  # --- exception and rework ------------------------------------------------
+  - name: Remove Payment Block
+    owner: buyer
+    isco: 3
+    family: judgment
+    minutes: 12
+    contact: true
+    why: Requires finding why the block fired and deciding to release it; the
+         largest rework loop in the log at 57,136 events.
+
+  - name: Set Payment Block
+    owner: buyer
+    isco: 3
+    family: judgment
+    minutes: 5
+    contact: false
+    why: A deliberate hold placed on a supplier account or document.
+
+  - name: Cancel Invoice Receipt
+    owner: buyer
+    isco: 3
+    family: judgment
+    minutes: 15
+    contact: true
+    why: Reversal of a posted invoice; needs a reason and usually a supplier call.
+
+  - name: Cancel Goods Receipt
+    owner: buyer
+    isco: 3
+    family: judgment
+    minutes: 10
+    contact: false
+    why: Reversal against a physical receipt, checked with the receiving site.
+
+  - name: Cancel Subsequent Invoice
+    owner: buyer
+    isco: 3
+    family: judgment
+    minutes: 15
+    contact: true
+    why: Reversal of a supplementary charge; rare and individually investigated.
+
+  - name: Record Subsequent Invoice
+    owner: buyer
+    isco: 3
+    family: transactional
+    minutes: 8
+    contact: false
+    why: Posting a supplementary charge against an existing PO.
+
+  - name: Block Purchase Order Item
+    owner: buyer
+    isco: 3
+    family: judgment
+    minutes: 5
+    contact: false
+    why: A hold on a line pending resolution; a decision, not a keystroke.
+
+  - name: Reactivate Purchase Order Item
+    owner: buyer
+    isco: 3
+    family: judgment
+    minutes: 5
+    contact: false
+    why: Release of the hold above, once whatever caused it is resolved.
+
+  - name: Delete Purchase Order Item
+    owner: buyer
+    isco: 4
+    family: transactional
+    minutes: 4
+    contact: true
+    why: Cancellation on the requester's instruction; clerical once decided.
+
+  # --- changes to a live order --------------------------------------------
+  - name: Change Quantity
+    owner: buyer
+    isco: 3
+    family: transactional
+    minutes: 5
+    contact: true
+    why: Amendment agreed with the supplier before delivery.
+
+  - name: Change Price
+    owner: buyer
+    isco: 3
+    family: judgment
+    minutes: 8
+    contact: true
+    why: A commercial change; touches what is owed, so it carries authority.
+
+  - name: Change Delivery Indicator
+    owner: buyer
+    isco: 4
+    family: transactional
+    minutes: 3
+    contact: false
+    why: Flag maintenance on the line; no commercial content.
+
+  - name: Change Storage Location
+    owner: buyer
+    isco: 4
+    family: transactional
+    minutes: 3
+    contact: false
+    why: Master-data correction against the receiving site.
+
+  - name: Change Currency
+    owner: buyer
+    isco: 2
+    family: judgment
+    minutes: 6
+    contact: true
+    why: Changes the FX exposure on a commitment; a treasury-adjacent decision.
+
+  - name: Change payment term
+    owner: buyer
+    isco: 2
+    family: judgment
+    minutes: 10
+    contact: true
+    why: Working-capital terms are negotiated, not maintained.
+
+  - name: Change Final Invoice Indicator
+    owner: buyer
+    isco: 4
+    family: transactional
+    minutes: 3
+    contact: false
+    why: Closes a line to further invoicing; a flag with a checked consequence.
+
+  - name: Change Rejection Indicator
+    owner: buyer
+    isco: 4
+    family: transactional
+    minutes: 3
+    contact: false
+    why: Flag maintenance; two events in the whole log.
+
+  # --- approval and release ------------------------------------------------
+  - name: Release Purchase Requisition
+    owner: buyer
+    isco: 3
+    family: judgment
+    minutes: 3
+    contact: false
+    why: Budget-holder release against a threshold; 42% already runs in batch.
+
+  - name: Release Purchase Order
+    owner: buyer
+    isco: 2
+    family: judgment
+    minutes: 3
+    contact: false
+    why: Commits the company to spend. Authority sits with the business.
+
+  - name: Change Approval for Purchase Order
+    owner: buyer
+    isco: 2
+    family: judgment
+    minutes: 8
+    contact: true
+    why: Re-approval after a change; the control that makes changes safe.
+
+  # --- supplier confirmations ---------------------------------------------
+  - name: Receive Order Confirmation
+    owner: buyer
+    isco: 4
+    family: transactional
+    minutes: 2
+    contact: true
+    why: Matching the supplier's acknowledgement to the order.
+
+  - name: Update Order Confirmation
+    owner: buyer
+    isco: 4
+    family: transactional
+    minutes: 3
+    contact: true
+    why: Correcting a confirmation against what the supplier actually sent.
+
+  # --- SRM workflow --------------------------------------------------------
+  # Eleven of these are status transitions written by a single `batch_*` id at
+  # 88–100% batch. They are the system telling itself where a document is, not
+  # work anybody does, so they carry no labour and are not assigned. The one
+  # exception is the transfer failure, which a named user handles.
+  - name: "SRM: Transfer Failed (E.Sys.)"
+    owner: buyer
+    isco: 3
+    family: judgment
+    minutes: 20
+    contact: false
+    why: An integration failure someone has to diagnose; 45 events, one user, no batch.
+
+  - name: "SRM: Created"
+    owner: system
+    isco: 4
+    family: transactional
+    minutes: 0
+    contact: false
+    why: Workflow status; 88.5% batch on a single id.
+
+  - name: "SRM: Ordered"
+    owner: system
+    isco: 4
+    family: transactional
+    minutes: 0
+    contact: false
+    why: Workflow status; 100% batch on a single id.
+
+  - name: "SRM: Complete"
+    owner: system
+    isco: 4
+    family: transactional
+    minutes: 0
+    contact: false
+    why: Workflow status; 88.1% batch.
+
+  - name: "SRM: Document Completed"
+    owner: system
+    isco: 4
+    family: transactional
+    minutes: 0
+    contact: false
+    why: Workflow status; 88.1% batch.
+
+  - name: "SRM: Awaiting Approval"
+    owner: system
+    isco: 4
+    family: transactional
+    minutes: 0
+    contact: false
+    why: Status flag; the approval itself is Release Purchase Order.
+
+  - name: "SRM: In Transfer to Execution Syst."
+    owner: system
+    isco: 4
+    family: transactional
+    minutes: 0
+    contact: false
+    why: Interface hand-off; 93.3% batch.
+
+  - name: "SRM: Change was Transmitted"
+    owner: system
+    isco: 4
+    family: transactional
+    minutes: 0
+    contact: false
+    why: Interface confirmation; 100% batch on a single id.
+
+  - name: "SRM: Transaction Completed"
+    owner: system
+    isco: 4
+    family: transactional
+    minutes: 0
+    contact: false
+    why: Workflow terminal status; 8 events in the log.
+
+  - name: "SRM: Deleted"
+    owner: system
+    isco: 4
+    family: transactional
+    minutes: 0
+    contact: false
+    why: Workflow status; 100% batch on a single id.
+
+  - name: "SRM: Held"
+    owner: system
+    isco: 4
+    family: transactional
+    minutes: 0
+    contact: false
+    why: Workflow status; 100% batch, 6 events.
+
+  - name: "SRM: Incomplete"
+    owner: system
+    isco: 4
+    family: transactional
+    minutes: 0
+    contact: false
+    why: Workflow status; 100% batch, 6 events.

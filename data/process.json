@@ -1,0 +1,2878 @@
+{
+ "source": "p2p-process-mining",
+ "cases": 251734,
+ "variants": 11973,
+ "transitions": 1344189,
+ "activities": [
+  {
+   "name": "Record Goods Receipt",
+   "events": 314097,
+   "cases": 234479,
+   "batch_events": 85034,
+   "batch_share": 0.2707252855009758,
+   "resources": 256,
+   "variant_occurrences": 314097
+  },
+  {
+   "name": "Create Purchase Order Item",
+   "events": 251734,
+   "cases": 251734,
+   "batch_events": 19223,
+   "batch_share": 0.07636235073529996,
+   "resources": 185,
+   "variant_occurrences": 251734
+  },
+  {
+   "name": "Record Invoice Receipt",
+   "events": 228760,
+   "cases": 211379,
+   "batch_events": 9472,
+   "batch_share": 0.04140584018184997,
+   "resources": 31,
+   "variant_occurrences": 228760
+  },
+  {
+   "name": "Vendor creates invoice",
+   "events": 219919,
+   "cases": 209946,
+   "batch_events": 0,
+   "batch_share": 0.0,
+   "resources": 1,
+   "variant_occurrences": 219919
+  },
+  {
+   "name": "Clear Invoice",
+   "events": 194393,
+   "cases": 183677,
+   "batch_events": 0,
+   "batch_share": 0.0,
+   "resources": 24,
+   "variant_occurrences": 194393
+  },
+  {
+   "name": "Record Service Entry Sheet",
+   "events": 164975,
+   "cases": 5604,
+   "batch_events": 0,
+   "batch_share": 0.0,
+   "resources": 1,
+   "variant_occurrences": 164975
+  },
+  {
+   "name": "Remove Payment Block",
+   "events": 57136,
+   "cases": 55839,
+   "batch_events": 15442,
+   "batch_share": 0.270267432091851,
+   "resources": 12,
+   "variant_occurrences": 57136
+  },
+  {
+   "name": "Create Purchase Requisition Item",
+   "events": 46592,
+   "cases": 46592,
+   "batch_events": 10237,
+   "batch_share": 0.21971583104395603,
+   "resources": 233,
+   "variant_occurrences": 46592
+  },
+  {
+   "name": "Receive Order Confirmation",
+   "events": 32065,
+   "cases": 32061,
+   "batch_events": 4696,
+   "batch_share": 0.1464525183221581,
+   "resources": 10,
+   "variant_occurrences": 32065
+  },
+  {
+   "name": "Change Quantity",
+   "events": 21449,
+   "cases": 17590,
+   "batch_events": 2,
+   "batch_share": 9.32444403002471e-05,
+   "resources": 166,
+   "variant_occurrences": 21449
+  },
+  {
+   "name": "Change Price",
+   "events": 12423,
+   "cases": 11224,
+   "batch_events": 0,
+   "batch_share": 0.0,
+   "resources": 134,
+   "variant_occurrences": 12423
+  },
+  {
+   "name": "Delete Purchase Order Item",
+   "events": 8875,
+   "cases": 8839,
+   "batch_events": 0,
+   "batch_share": 0.0,
+   "resources": 136,
+   "variant_occurrences": 8875
+  },
+  {
+   "name": "Change Approval for Purchase Order",
+   "events": 7541,
+   "cases": 4377,
+   "batch_events": 0,
+   "batch_share": 0.0,
+   "resources": 49,
+   "variant_occurrences": 7541
+  },
+  {
+   "name": "Cancel Invoice Receipt",
+   "events": 7096,
+   "cases": 6471,
+   "batch_events": 723,
+   "batch_share": 0.10188838782412626,
+   "resources": 21,
+   "variant_occurrences": 7096
+  },
+  {
+   "name": "Vendor creates debit memo",
+   "events": 6255,
+   "cases": 5988,
+   "batch_events": 0,
+   "batch_share": 0.0,
+   "resources": 1,
+   "variant_occurrences": 6255
+  },
+  {
+   "name": "Change Delivery Indicator",
+   "events": 3289,
+   "cases": 2975,
+   "batch_events": 0,
+   "batch_share": 0.0,
+   "resources": 109,
+   "variant_occurrences": 3289
+  },
+  {
+   "name": "Cancel Goods Receipt",
+   "events": 3096,
+   "cases": 2470,
+   "batch_events": 492,
+   "batch_share": 0.15891472868217055,
+   "resources": 111,
+   "variant_occurrences": 3096
+  },
+  {
+   "name": "SRM: In Transfer to Execution Syst.",
+   "events": 1765,
+   "cases": 1440,
+   "batch_events": 1647,
+   "batch_share": 0.9331444759206798,
+   "resources": 12,
+   "variant_occurrences": 1765
+  },
+  {
+   "name": "SRM: Document Completed",
+   "events": 1628,
+   "cases": 1440,
+   "batch_events": 1434,
+   "batch_share": 0.8808353808353808,
+   "resources": 13,
+   "variant_occurrences": 1628
+  },
+  {
+   "name": "SRM: Created",
+   "events": 1628,
+   "cases": 1440,
+   "batch_events": 1440,
+   "batch_share": 0.8845208845208845,
+   "resources": 12,
+   "variant_occurrences": 1628
+  },
+  {
+   "name": "SRM: Ordered",
+   "events": 1628,
+   "cases": 1440,
+   "batch_events": 1628,
+   "batch_share": 1.0,
+   "resources": 1,
+   "variant_occurrences": 1628
+  },
+  {
+   "name": "SRM: Complete",
+   "events": 1628,
+   "cases": 1440,
+   "batch_events": 1434,
+   "batch_share": 0.8808353808353808,
+   "resources": 13,
+   "variant_occurrences": 1628
+  },
+  {
+   "name": "SRM: Awaiting Approval",
+   "events": 1628,
+   "cases": 1440,
+   "batch_events": 1434,
+   "batch_share": 0.8808353808353808,
+   "resources": 13,
+   "variant_occurrences": 1628
+  },
+  {
+   "name": "Release Purchase Order",
+   "events": 1610,
+   "cases": 961,
+   "batch_events": 0,
+   "batch_share": 0.0,
+   "resources": 20,
+   "variant_occurrences": 1610
+  },
+  {
+   "name": "SRM: Change was Transmitted",
+   "events": 1440,
+   "cases": 1440,
+   "batch_events": 1440,
+   "batch_share": 1.0,
+   "resources": 1,
+   "variant_occurrences": 1440
+  },
+  {
+   "name": "Reactivate Purchase Order Item",
+   "events": 543,
+   "cases": 529,
+   "batch_events": 0,
+   "batch_share": 0.0,
+   "resources": 51,
+   "variant_occurrences": 543
+  },
+  {
+   "name": "Block Purchase Order Item",
+   "events": 514,
+   "cases": 499,
+   "batch_events": 0,
+   "batch_share": 0.0,
+   "resources": 5,
+   "variant_occurrences": 514
+  },
+  {
+   "name": "Cancel Subsequent Invoice",
+   "events": 491,
+   "cases": 476,
+   "batch_events": 0,
+   "batch_share": 0.0,
+   "resources": 10,
+   "variant_occurrences": 491
+  },
+  {
+   "name": "Release Purchase Requisition",
+   "events": 467,
+   "cases": 467,
+   "batch_events": 196,
+   "batch_share": 0.4197002141327623,
+   "resources": 38,
+   "variant_occurrences": 467
+  },
+  {
+   "name": "Change Storage Location",
+   "events": 415,
+   "cases": 364,
+   "batch_events": 0,
+   "batch_share": 0.0,
+   "resources": 56,
+   "variant_occurrences": 415
+  },
+  {
+   "name": "Update Order Confirmation",
+   "events": 244,
+   "cases": 227,
+   "batch_events": 8,
+   "batch_share": 0.03278688524590164,
+   "resources": 7,
+   "variant_occurrences": 244
+  },
+  {
+   "name": "SRM: Deleted",
+   "events": 188,
+   "cases": 143,
+   "batch_events": 188,
+   "batch_share": 1.0,
+   "resources": 1,
+   "variant_occurrences": 188
+  },
+  {
+   "name": "Record Subsequent Invoice",
+   "events": 167,
+   "cases": 159,
+   "batch_events": 5,
+   "batch_share": 0.029940119760479042,
+   "resources": 10,
+   "variant_occurrences": 167
+  },
+  {
+   "name": "Set Payment Block",
+   "events": 124,
+   "cases": 122,
+   "batch_events": 0,
+   "batch_share": 0.0,
+   "resources": 7,
+   "variant_occurrences": 124
+  },
+  {
+   "name": "SRM: Transfer Failed (E.Sys.)",
+   "events": 45,
+   "cases": 45,
+   "batch_events": 0,
+   "batch_share": 0.0,
+   "resources": 1,
+   "variant_occurrences": 45
+  },
+  {
+   "name": "Change Currency",
+   "events": 35,
+   "cases": 35,
+   "batch_events": 0,
+   "batch_share": 0.0,
+   "resources": 7,
+   "variant_occurrences": 35
+  },
+  {
+   "name": "Change Final Invoice Indicator",
+   "events": 11,
+   "cases": 11,
+   "batch_events": 0,
+   "batch_share": 0.0,
+   "resources": 2,
+   "variant_occurrences": 11
+  },
+  {
+   "name": "SRM: Transaction Completed",
+   "events": 8,
+   "cases": 8,
+   "batch_events": 0,
+   "batch_share": 0.0,
+   "resources": 5,
+   "variant_occurrences": 8
+  },
+  {
+   "name": "Change payment term",
+   "events": 7,
+   "cases": 7,
+   "batch_events": 0,
+   "batch_share": 0.0,
+   "resources": 4,
+   "variant_occurrences": 7
+  },
+  {
+   "name": "SRM: Held",
+   "events": 6,
+   "cases": 6,
+   "batch_events": 6,
+   "batch_share": 1.0,
+   "resources": 1,
+   "variant_occurrences": 6
+  },
+  {
+   "name": "SRM: Incomplete",
+   "events": 6,
+   "cases": 6,
+   "batch_events": 6,
+   "batch_share": 1.0,
+   "resources": 1,
+   "variant_occurrences": 6
+  },
+  {
+   "name": "Change Rejection Indicator",
+   "events": 2,
+   "cases": 1,
+   "batch_events": 0,
+   "batch_share": 0.0,
+   "resources": 1,
+   "variant_occurrences": 2
+  }
+ ],
+ "edges": [
+  {
+   "from": "Record Service Entry Sheet",
+   "to": "Record Service Entry Sheet",
+   "cases": 139107
+  },
+  {
+   "from": "Record Invoice Receipt",
+   "to": "Clear Invoice",
+   "cases": 134955
+  },
+  {
+   "from": "Record Goods Receipt",
+   "to": "Record Invoice Receipt",
+   "cases": 112182
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "Record Goods Receipt",
+   "cases": 110215
+  },
+  {
+   "from": "Create Purchase Order Item",
+   "to": "Vendor creates invoice",
+   "cases": 103150
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "Record Invoice Receipt",
+   "cases": 95218
+  },
+  {
+   "from": "Record Goods Receipt",
+   "to": "Vendor creates invoice",
+   "cases": 80616
+  },
+  {
+   "from": "Create Purchase Order Item",
+   "to": "Record Goods Receipt",
+   "cases": 77206
+  },
+  {
+   "from": "Record Goods Receipt",
+   "to": "Record Goods Receipt",
+   "cases": 54277
+  },
+  {
+   "from": "Remove Payment Block",
+   "to": "Clear Invoice",
+   "cases": 49424
+  },
+  {
+   "from": "Create Purchase Requisition Item",
+   "to": "Create Purchase Order Item",
+   "cases": 46125
+  },
+  {
+   "from": "Record Invoice Receipt",
+   "to": "Remove Payment Block",
+   "cases": 37621
+  },
+  {
+   "from": "Create Purchase Order Item",
+   "to": "Receive Order Confirmation",
+   "cases": 30837
+  },
+  {
+   "from": "Record Goods Receipt",
+   "to": "Record Service Entry Sheet",
+   "cases": 23151
+  },
+  {
+   "from": "Receive Order Confirmation",
+   "to": "Record Goods Receipt",
+   "cases": 20398
+  },
+  {
+   "from": "Record Service Entry Sheet",
+   "to": "Record Goods Receipt",
+   "cases": 19183
+  },
+  {
+   "from": "Record Invoice Receipt",
+   "to": "Record Goods Receipt",
+   "cases": 15580
+  },
+  {
+   "from": "Record Goods Receipt",
+   "to": "Remove Payment Block",
+   "cases": 15370
+  },
+  {
+   "from": "Create Purchase Order Item",
+   "to": "Change Quantity",
+   "cases": 11760
+  },
+  {
+   "from": "Change Quantity",
+   "to": "Record Goods Receipt",
+   "cases": 9206
+  },
+  {
+   "from": "Receive Order Confirmation",
+   "to": "Vendor creates invoice",
+   "cases": 9190
+  },
+  {
+   "from": "Create Purchase Order Item",
+   "to": "Delete Purchase Order Item",
+   "cases": 6890
+  },
+  {
+   "from": "Record Invoice Receipt",
+   "to": "Record Invoice Receipt",
+   "cases": 6783
+  },
+  {
+   "from": "Create Purchase Order Item",
+   "to": "Change Price",
+   "cases": 6433
+  },
+  {
+   "from": "Change Quantity",
+   "to": "Vendor creates invoice",
+   "cases": 5994
+  },
+  {
+   "from": "Record Invoice Receipt",
+   "to": "Vendor creates invoice",
+   "cases": 4054
+  },
+  {
+   "from": "Clear Invoice",
+   "to": "Record Invoice Receipt",
+   "cases": 3958
+  },
+  {
+   "from": "Change Price",
+   "to": "Vendor creates invoice",
+   "cases": 3396
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "Create Purchase Order Item",
+   "cases": 3318
+  },
+  {
+   "from": "Clear Invoice",
+   "to": "Clear Invoice",
+   "cases": 3213
+  },
+  {
+   "from": "Change Price",
+   "to": "Record Goods Receipt",
+   "cases": 3102
+  },
+  {
+   "from": "Create Purchase Order Item",
+   "to": "Change Approval for Purchase Order",
+   "cases": 3060
+  },
+  {
+   "from": "Cancel Invoice Receipt",
+   "to": "Clear Invoice",
+   "cases": 3002
+  },
+  {
+   "from": "Record Service Entry Sheet",
+   "to": "Vendor creates invoice",
+   "cases": 2823
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "Vendor creates debit memo",
+   "cases": 2715
+  },
+  {
+   "from": "Record Invoice Receipt",
+   "to": "Cancel Invoice Receipt",
+   "cases": 2697
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "Change Quantity",
+   "cases": 2545
+  },
+  {
+   "from": "Change Quantity",
+   "to": "Change Quantity",
+   "cases": 2290
+  },
+  {
+   "from": "Clear Invoice",
+   "to": "Cancel Invoice Receipt",
+   "cases": 2111
+  },
+  {
+   "from": "Create Purchase Order Item",
+   "to": "Record Service Entry Sheet",
+   "cases": 2072
+  },
+  {
+   "from": "Record Service Entry Sheet",
+   "to": "Record Invoice Receipt",
+   "cases": 2029
+  },
+  {
+   "from": "Cancel Invoice Receipt",
+   "to": "Record Invoice Receipt",
+   "cases": 1954
+  },
+  {
+   "from": "Vendor creates debit memo",
+   "to": "Vendor creates invoice",
+   "cases": 1926
+  },
+  {
+   "from": "Record Invoice Receipt",
+   "to": "Change Price",
+   "cases": 1874
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "Vendor creates invoice",
+   "cases": 1788
+  },
+  {
+   "from": "Change Price",
+   "to": "Remove Payment Block",
+   "cases": 1721
+  },
+  {
+   "from": "Create Purchase Order Item",
+   "to": "Record Invoice Receipt",
+   "cases": 1673
+  },
+  {
+   "from": "SRM: Complete",
+   "to": "SRM: Awaiting Approval",
+   "cases": 1628
+  },
+  {
+   "from": "SRM: Awaiting Approval",
+   "to": "SRM: Document Completed",
+   "cases": 1626
+  },
+  {
+   "from": "SRM: Created",
+   "to": "SRM: Complete",
+   "cases": 1599
+  },
+  {
+   "from": "Change Approval for Purchase Order",
+   "to": "Change Approval for Purchase Order",
+   "cases": 1588
+  },
+  {
+   "from": "Release Purchase Order",
+   "to": "Change Approval for Purchase Order",
+   "cases": 1489
+  },
+  {
+   "from": "Record Goods Receipt",
+   "to": "Change Quantity",
+   "cases": 1472
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "Clear Invoice",
+   "cases": 1443
+  },
+  {
+   "from": "Vendor creates debit memo",
+   "to": "Record Invoice Receipt",
+   "cases": 1317
+  },
+  {
+   "from": "Clear Invoice",
+   "to": "Vendor creates invoice",
+   "cases": 1299
+  },
+  {
+   "from": "Receive Order Confirmation",
+   "to": "Delete Purchase Order Item",
+   "cases": 1229
+  },
+  {
+   "from": "Vendor creates debit memo",
+   "to": "Record Goods Receipt",
+   "cases": 1144
+  },
+  {
+   "from": "SRM: Document Completed",
+   "to": "SRM: In Transfer to Execution Syst.",
+   "cases": 1131
+  },
+  {
+   "from": "Change Quantity",
+   "to": "Change Delivery Indicator",
+   "cases": 1130
+  },
+  {
+   "from": "SRM: In Transfer to Execution Syst.",
+   "to": "SRM: Ordered",
+   "cases": 1118
+  },
+  {
+   "from": "Change Price",
+   "to": "Change Quantity",
+   "cases": 1106
+  },
+  {
+   "from": "Record Goods Receipt",
+   "to": "Cancel Goods Receipt",
+   "cases": 1063
+  },
+  {
+   "from": "Create Purchase Order Item",
+   "to": "Vendor creates debit memo",
+   "cases": 1052
+  },
+  {
+   "from": "Vendor creates debit memo",
+   "to": "Cancel Invoice Receipt",
+   "cases": 996
+  },
+  {
+   "from": "Create Purchase Order Item",
+   "to": "Cancel Goods Receipt",
+   "cases": 925
+  },
+  {
+   "from": "Change Price",
+   "to": "Record Invoice Receipt",
+   "cases": 908
+  },
+  {
+   "from": "Cancel Goods Receipt",
+   "to": "Record Goods Receipt",
+   "cases": 896
+  },
+  {
+   "from": "Change Approval for Purchase Order",
+   "to": "Vendor creates invoice",
+   "cases": 884
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "Change Price",
+   "cases": 855
+  },
+  {
+   "from": "SRM: Change was Transmitted",
+   "to": "Create Purchase Order Item",
+   "cases": 821
+  },
+  {
+   "from": "SRM: Ordered",
+   "to": "SRM: Change was Transmitted",
+   "cases": 775
+  },
+  {
+   "from": "Clear Invoice",
+   "to": "Remove Payment Block",
+   "cases": 766
+  },
+  {
+   "from": "Record Goods Receipt",
+   "to": "Change Price",
+   "cases": 761
+  },
+  {
+   "from": "Clear Invoice",
+   "to": "Record Goods Receipt",
+   "cases": 759
+  },
+  {
+   "from": "Create Purchase Order Item",
+   "to": "Release Purchase Order",
+   "cases": 746
+  },
+  {
+   "from": "Record Goods Receipt",
+   "to": "Change Delivery Indicator",
+   "cases": 733
+  },
+  {
+   "from": "Change Approval for Purchase Order",
+   "to": "Receive Order Confirmation",
+   "cases": 715
+  },
+  {
+   "from": "Change Delivery Indicator",
+   "to": "Record Goods Receipt",
+   "cases": 706
+  },
+  {
+   "from": "Change Delivery Indicator",
+   "to": "Record Invoice Receipt",
+   "cases": 705
+  },
+  {
+   "from": "Change Approval for Purchase Order",
+   "to": "Record Invoice Receipt",
+   "cases": 676
+  },
+  {
+   "from": "Change Price",
+   "to": "Change Price",
+   "cases": 671
+  },
+  {
+   "from": "Record Invoice Receipt",
+   "to": "Change Quantity",
+   "cases": 662
+  },
+  {
+   "from": "Change Quantity",
+   "to": "Record Invoice Receipt",
+   "cases": 659
+  },
+  {
+   "from": "Change Approval for Purchase Order",
+   "to": "Release Purchase Order",
+   "cases": 637
+  },
+  {
+   "from": "Record Goods Receipt",
+   "to": "Vendor creates debit memo",
+   "cases": 636
+  },
+  {
+   "from": "Cancel Invoice Receipt",
+   "to": "Remove Payment Block",
+   "cases": 611
+  },
+  {
+   "from": "Record Goods Receipt",
+   "to": "Clear Invoice",
+   "cases": 556
+  },
+  {
+   "from": "Record Invoice Receipt",
+   "to": "Vendor creates debit memo",
+   "cases": 544
+  },
+  {
+   "from": "Cancel Goods Receipt",
+   "to": "Vendor creates debit memo",
+   "cases": 513
+  },
+  {
+   "from": "Change Quantity",
+   "to": "Change Price",
+   "cases": 510
+  },
+  {
+   "from": "Receive Order Confirmation",
+   "to": "Change Quantity",
+   "cases": 472
+  },
+  {
+   "from": "Create Purchase Requisition Item",
+   "to": "Release Purchase Requisition",
+   "cases": 467
+  },
+  {
+   "from": "Release Purchase Requisition",
+   "to": "Create Purchase Order Item",
+   "cases": 467
+  },
+  {
+   "from": "SRM: Document Completed",
+   "to": "SRM: Ordered",
+   "cases": 453
+  },
+  {
+   "from": "Create Purchase Order Item",
+   "to": "Change Delivery Indicator",
+   "cases": 446
+  },
+  {
+   "from": "Remove Payment Block",
+   "to": "Record Invoice Receipt",
+   "cases": 442
+  },
+  {
+   "from": "Create Purchase Order Item",
+   "to": "SRM: Change was Transmitted",
+   "cases": 440
+  },
+  {
+   "from": "Change Approval for Purchase Order",
+   "to": "Change Price",
+   "cases": 433
+  },
+  {
+   "from": "Remove Payment Block",
+   "to": "Record Goods Receipt",
+   "cases": 432
+  },
+  {
+   "from": "Change Approval for Purchase Order",
+   "to": "Create Purchase Order Item",
+   "cases": 382
+  },
+  {
+   "from": "Record Service Entry Sheet",
+   "to": "Cancel Goods Receipt",
+   "cases": 382
+  },
+  {
+   "from": "SRM: Ordered",
+   "to": "Create Purchase Order Item",
+   "cases": 364
+  },
+  {
+   "from": "Record Goods Receipt",
+   "to": "Cancel Invoice Receipt",
+   "cases": 356
+  },
+  {
+   "from": "Record Service Entry Sheet",
+   "to": "Clear Invoice",
+   "cases": 355
+  },
+  {
+   "from": "SRM: Ordered",
+   "to": "SRM: In Transfer to Execution Syst.",
+   "cases": 354
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "Record Service Entry Sheet",
+   "cases": 351
+  },
+  {
+   "from": "Remove Payment Block",
+   "to": "Cancel Invoice Receipt",
+   "cases": 340
+  },
+  {
+   "from": "Change Approval for Purchase Order",
+   "to": "Change Quantity",
+   "cases": 319
+  },
+  {
+   "from": "Remove Payment Block",
+   "to": "Vendor creates invoice",
+   "cases": 312
+  },
+  {
+   "from": "Delete Purchase Order Item",
+   "to": "Change Approval for Purchase Order",
+   "cases": 303
+  },
+  {
+   "from": "Cancel Goods Receipt",
+   "to": "Cancel Invoice Receipt",
+   "cases": 300
+  },
+  {
+   "from": "SRM: Change was Transmitted",
+   "to": "Vendor creates invoice",
+   "cases": 295
+  },
+  {
+   "from": "Cancel Goods Receipt",
+   "to": "Cancel Goods Receipt",
+   "cases": 291
+  },
+  {
+   "from": "Change Price",
+   "to": "Clear Invoice",
+   "cases": 283
+  },
+  {
+   "from": "Delete Purchase Order Item",
+   "to": "Reactivate Purchase Order Item",
+   "cases": 272
+  },
+  {
+   "from": "Record Invoice Receipt",
+   "to": "Change Delivery Indicator",
+   "cases": 270
+  },
+  {
+   "from": "Change Delivery Indicator",
+   "to": "Clear Invoice",
+   "cases": 265
+  },
+  {
+   "from": "Reactivate Purchase Order Item",
+   "to": "Record Goods Receipt",
+   "cases": 260
+  },
+  {
+   "from": "Create Purchase Order Item",
+   "to": "Block Purchase Order Item",
+   "cases": 252
+  },
+  {
+   "from": "Change Approval for Purchase Order",
+   "to": "Record Goods Receipt",
+   "cases": 251
+  },
+  {
+   "from": "Create Purchase Order Item",
+   "to": "Change Storage Location",
+   "cases": 250
+  },
+  {
+   "from": "Change Quantity",
+   "to": "Receive Order Confirmation",
+   "cases": 236
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "Change Delivery Indicator",
+   "cases": 232
+  },
+  {
+   "from": "Change Quantity",
+   "to": "Delete Purchase Order Item",
+   "cases": 229
+  },
+  {
+   "from": "SRM: In Transfer to Execution Syst.",
+   "to": "Create Purchase Order Item",
+   "cases": 228
+  },
+  {
+   "from": "Vendor creates debit memo",
+   "to": "Cancel Subsequent Invoice",
+   "cases": 228
+  },
+  {
+   "from": "Cancel Subsequent Invoice",
+   "to": "Clear Invoice",
+   "cases": 226
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "Change Approval for Purchase Order",
+   "cases": 222
+  },
+  {
+   "from": "Change Delivery Indicator",
+   "to": "Vendor creates invoice",
+   "cases": 221
+  },
+  {
+   "from": "Receive Order Confirmation",
+   "to": "Change Price",
+   "cases": 221
+  },
+  {
+   "from": "SRM: In Transfer to Execution Syst.",
+   "to": "SRM: Change was Transmitted",
+   "cases": 220
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "Remove Payment Block",
+   "cases": 217
+  },
+  {
+   "from": "Cancel Subsequent Invoice",
+   "to": "Remove Payment Block",
+   "cases": 206
+  },
+  {
+   "from": "Change Storage Location",
+   "to": "Record Goods Receipt",
+   "cases": 195
+  },
+  {
+   "from": "Remove Payment Block",
+   "to": "Remove Payment Block",
+   "cases": 194
+  },
+  {
+   "from": "Vendor creates debit memo",
+   "to": "Clear Invoice",
+   "cases": 190
+  },
+  {
+   "from": "Receive Order Confirmation",
+   "to": "Update Order Confirmation",
+   "cases": 182
+  },
+  {
+   "from": "Change Delivery Indicator",
+   "to": "Change Delivery Indicator",
+   "cases": 177
+  },
+  {
+   "from": "Change Quantity",
+   "to": "Clear Invoice",
+   "cases": 157
+  },
+  {
+   "from": "Change Delivery Indicator",
+   "to": "Vendor creates debit memo",
+   "cases": 151
+  },
+  {
+   "from": "Cancel Goods Receipt",
+   "to": "Vendor creates invoice",
+   "cases": 145
+  },
+  {
+   "from": "Change Delivery Indicator",
+   "to": "Change Quantity",
+   "cases": 141
+  },
+  {
+   "from": "Vendor creates debit memo",
+   "to": "Remove Payment Block",
+   "cases": 140
+  },
+  {
+   "from": "Change Price",
+   "to": "Receive Order Confirmation",
+   "cases": 138
+  },
+  {
+   "from": "Change Quantity",
+   "to": "Change Approval for Purchase Order",
+   "cases": 137
+  },
+  {
+   "from": "Block Purchase Order Item",
+   "to": "Delete Purchase Order Item",
+   "cases": 132
+  },
+  {
+   "from": "SRM: Ordered",
+   "to": "SRM: Deleted",
+   "cases": 132
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "SRM: Created",
+   "cases": 131
+  },
+  {
+   "from": "Clear Invoice",
+   "to": "Change Approval for Purchase Order",
+   "cases": 129
+  },
+  {
+   "from": "Vendor creates debit memo",
+   "to": "Create Purchase Order Item",
+   "cases": 126
+  },
+  {
+   "from": "Clear Invoice",
+   "to": "Vendor creates debit memo",
+   "cases": 122
+  },
+  {
+   "from": "Change Approval for Purchase Order",
+   "to": "Clear Invoice",
+   "cases": 120
+  },
+  {
+   "from": "Clear Invoice",
+   "to": "Change Price",
+   "cases": 120
+  },
+  {
+   "from": "Remove Payment Block",
+   "to": "Change Price",
+   "cases": 120
+  },
+  {
+   "from": "Block Purchase Order Item",
+   "to": "Reactivate Purchase Order Item",
+   "cases": 117
+  },
+  {
+   "from": "Remove Payment Block",
+   "to": "Change Quantity",
+   "cases": 117
+  },
+  {
+   "from": "Record Invoice Receipt",
+   "to": "Change Approval for Purchase Order",
+   "cases": 115
+  },
+  {
+   "from": "Clear Invoice",
+   "to": "Record Service Entry Sheet",
+   "cases": 114
+  },
+  {
+   "from": "Change Price",
+   "to": "Delete Purchase Order Item",
+   "cases": 110
+  },
+  {
+   "from": "Clear Invoice",
+   "to": "Change Quantity",
+   "cases": 110
+  },
+  {
+   "from": "SRM: Change was Transmitted",
+   "to": "Record Goods Receipt",
+   "cases": 110
+  },
+  {
+   "from": "SRM: Deleted",
+   "to": "Change Price",
+   "cases": 110
+  },
+  {
+   "from": "Change Approval for Purchase Order",
+   "to": "Block Purchase Order Item",
+   "cases": 107
+  },
+  {
+   "from": "Remove Payment Block",
+   "to": "Vendor creates debit memo",
+   "cases": 105
+  },
+  {
+   "from": "Update Order Confirmation",
+   "to": "Record Goods Receipt",
+   "cases": 105
+  },
+  {
+   "from": "Change Delivery Indicator",
+   "to": "Remove Payment Block",
+   "cases": 104
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "Cancel Invoice Receipt",
+   "cases": 104
+  },
+  {
+   "from": "Record Invoice Receipt",
+   "to": "Set Payment Block",
+   "cases": 103
+  },
+  {
+   "from": "Receive Order Confirmation",
+   "to": "Record Invoice Receipt",
+   "cases": 100
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "Cancel Goods Receipt",
+   "cases": 98
+  },
+  {
+   "from": "Record Invoice Receipt",
+   "to": "Cancel Subsequent Invoice",
+   "cases": 97
+  },
+  {
+   "from": "Record Subsequent Invoice",
+   "to": "Clear Invoice",
+   "cases": 97
+  },
+  {
+   "from": "Cancel Goods Receipt",
+   "to": "Record Invoice Receipt",
+   "cases": 95
+  },
+  {
+   "from": "Reactivate Purchase Order Item",
+   "to": "Change Quantity",
+   "cases": 95
+  },
+  {
+   "from": "SRM: Change was Transmitted",
+   "to": "SRM: In Transfer to Execution Syst.",
+   "cases": 95
+  },
+  {
+   "from": "Cancel Goods Receipt",
+   "to": "Change Quantity",
+   "cases": 92
+  },
+  {
+   "from": "Change Quantity",
+   "to": "Remove Payment Block",
+   "cases": 92
+  },
+  {
+   "from": "Remove Payment Block",
+   "to": "Change Delivery Indicator",
+   "cases": 91
+  },
+  {
+   "from": "Clear Invoice",
+   "to": "Cancel Subsequent Invoice",
+   "cases": 89
+  },
+  {
+   "from": "Cancel Goods Receipt",
+   "to": "Change Delivery Indicator",
+   "cases": 88
+  },
+  {
+   "from": "Change Quantity",
+   "to": "Vendor creates debit memo",
+   "cases": 84
+  },
+  {
+   "from": "Reactivate Purchase Order Item",
+   "to": "Vendor creates invoice",
+   "cases": 83
+  },
+  {
+   "from": "Change Price",
+   "to": "Vendor creates debit memo",
+   "cases": 81
+  },
+  {
+   "from": "Record Service Entry Sheet",
+   "to": "Change Price",
+   "cases": 81
+  },
+  {
+   "from": "Change Price",
+   "to": "Cancel Goods Receipt",
+   "cases": 79
+  },
+  {
+   "from": "Clear Invoice",
+   "to": "SRM: In Transfer to Execution Syst.",
+   "cases": 79
+  },
+  {
+   "from": "Change Quantity",
+   "to": "Reactivate Purchase Order Item",
+   "cases": 77
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "Receive Order Confirmation",
+   "cases": 76
+  },
+  {
+   "from": "Update Order Confirmation",
+   "to": "Vendor creates invoice",
+   "cases": 74
+  },
+  {
+   "from": "Change Price",
+   "to": "Change Approval for Purchase Order",
+   "cases": 73
+  },
+  {
+   "from": "Block Purchase Order Item",
+   "to": "Change Quantity",
+   "cases": 72
+  },
+  {
+   "from": "Cancel Goods Receipt",
+   "to": "Record Service Entry Sheet",
+   "cases": 71
+  },
+  {
+   "from": "Change Storage Location",
+   "to": "Vendor creates invoice",
+   "cases": 70
+  },
+  {
+   "from": "Cancel Goods Receipt",
+   "to": "Delete Purchase Order Item",
+   "cases": 65
+  },
+  {
+   "from": "Record Invoice Receipt",
+   "to": "Cancel Goods Receipt",
+   "cases": 63
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "Reactivate Purchase Order Item",
+   "cases": 63
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "Create Purchase Requisition Item",
+   "cases": 62
+  },
+  {
+   "from": "Cancel Invoice Receipt",
+   "to": "Cancel Invoice Receipt",
+   "cases": 60
+  },
+  {
+   "from": "Record Invoice Receipt",
+   "to": "Record Service Entry Sheet",
+   "cases": 57
+  },
+  {
+   "from": "Delete Purchase Order Item",
+   "to": "Change Quantity",
+   "cases": 56
+  },
+  {
+   "from": "SRM: In Transfer to Execution Syst.",
+   "to": "SRM: Deleted",
+   "cases": 56
+  },
+  {
+   "from": "Clear Invoice",
+   "to": "Record Subsequent Invoice",
+   "cases": 55
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "Block Purchase Order Item",
+   "cases": 54
+  },
+  {
+   "from": "Change Approval for Purchase Order",
+   "to": "Delete Purchase Order Item",
+   "cases": 53
+  },
+  {
+   "from": "Change Price",
+   "to": "Cancel Invoice Receipt",
+   "cases": 51
+  },
+  {
+   "from": "Vendor creates debit memo",
+   "to": "Change Quantity",
+   "cases": 51
+  },
+  {
+   "from": "Release Purchase Order",
+   "to": "Change Price",
+   "cases": 48
+  },
+  {
+   "from": "Remove Payment Block",
+   "to": "Cancel Subsequent Invoice",
+   "cases": 47
+  },
+  {
+   "from": "Delete Purchase Order Item",
+   "to": "Vendor creates invoice",
+   "cases": 46
+  },
+  {
+   "from": "Cancel Goods Receipt",
+   "to": "Change Price",
+   "cases": 45
+  },
+  {
+   "from": "Clear Invoice",
+   "to": "Cancel Goods Receipt",
+   "cases": 45
+  },
+  {
+   "from": "SRM: In Transfer to Execution Syst.",
+   "to": "SRM: Transfer Failed (E.Sys.)",
+   "cases": 45
+  },
+  {
+   "from": "Remove Payment Block",
+   "to": "Cancel Goods Receipt",
+   "cases": 44
+  },
+  {
+   "from": "Record Service Entry Sheet",
+   "to": "Vendor creates debit memo",
+   "cases": 43
+  },
+  {
+   "from": "Record Subsequent Invoice",
+   "to": "Remove Payment Block",
+   "cases": 43
+  },
+  {
+   "from": "Create Purchase Order Item",
+   "to": "SRM: In Transfer to Execution Syst.",
+   "cases": 42
+  },
+  {
+   "from": "Set Payment Block",
+   "to": "Clear Invoice",
+   "cases": 42
+  },
+  {
+   "from": "Change Delivery Indicator",
+   "to": "Cancel Invoice Receipt",
+   "cases": 41
+  },
+  {
+   "from": "Release Purchase Order",
+   "to": "Change Quantity",
+   "cases": 41
+  },
+  {
+   "from": "Vendor creates debit memo",
+   "to": "Cancel Goods Receipt",
+   "cases": 41
+  },
+  {
+   "from": "Change Storage Location",
+   "to": "Change Storage Location",
+   "cases": 40
+  },
+  {
+   "from": "Record Invoice Receipt",
+   "to": "Release Purchase Order",
+   "cases": 40
+  },
+  {
+   "from": "Record Invoice Receipt",
+   "to": "Record Subsequent Invoice",
+   "cases": 39
+  },
+  {
+   "from": "Record Goods Receipt",
+   "to": "Receive Order Confirmation",
+   "cases": 38
+  },
+  {
+   "from": "SRM: Change was Transmitted",
+   "to": "SRM: Ordered",
+   "cases": 37
+  },
+  {
+   "from": "Vendor creates debit memo",
+   "to": "Change Price",
+   "cases": 37
+  },
+  {
+   "from": "Record Invoice Receipt",
+   "to": "Block Purchase Order Item",
+   "cases": 34
+  },
+  {
+   "from": "Change Quantity",
+   "to": "Release Purchase Order",
+   "cases": 33
+  },
+  {
+   "from": "Clear Invoice",
+   "to": "Change Delivery Indicator",
+   "cases": 33
+  },
+  {
+   "from": "Delete Purchase Order Item",
+   "to": "Change Price",
+   "cases": 33
+  },
+  {
+   "from": "Reactivate Purchase Order Item",
+   "to": "Delete Purchase Order Item",
+   "cases": 33
+  },
+  {
+   "from": "Record Goods Receipt",
+   "to": "Change Approval for Purchase Order",
+   "cases": 33
+  },
+  {
+   "from": "Remove Payment Block",
+   "to": "Release Purchase Order",
+   "cases": 31
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "Change Storage Location",
+   "cases": 31
+  },
+  {
+   "from": "Change Price",
+   "to": "Change Storage Location",
+   "cases": 30
+  },
+  {
+   "from": "Change Price",
+   "to": "Release Purchase Order",
+   "cases": 30
+  },
+  {
+   "from": "Create Purchase Order Item",
+   "to": "SRM: Created",
+   "cases": 30
+  },
+  {
+   "from": "Cancel Invoice Receipt",
+   "to": "Vendor creates debit memo",
+   "cases": 29
+  },
+  {
+   "from": "Change Price",
+   "to": "Change Currency",
+   "cases": 29
+  },
+  {
+   "from": "Record Goods Receipt",
+   "to": "Release Purchase Order",
+   "cases": 29
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "Record Subsequent Invoice",
+   "cases": 29
+  },
+  {
+   "from": "Record Invoice Receipt",
+   "to": "SRM: Created",
+   "cases": 28
+  },
+  {
+   "from": "Change Quantity",
+   "to": "Cancel Goods Receipt",
+   "cases": 27
+  },
+  {
+   "from": "Change Storage Location",
+   "to": "Change Quantity",
+   "cases": 27
+  },
+  {
+   "from": "Clear Invoice",
+   "to": "Delete Purchase Order Item",
+   "cases": 27
+  },
+  {
+   "from": "Change Price",
+   "to": "Change Delivery Indicator",
+   "cases": 26
+  },
+  {
+   "from": "Cancel Invoice Receipt",
+   "to": "Vendor creates invoice",
+   "cases": 25
+  },
+  {
+   "from": "SRM: Document Completed",
+   "to": "Create Purchase Order Item",
+   "cases": 25
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "SRM: In Transfer to Execution Syst.",
+   "cases": 25
+  },
+  {
+   "from": "Cancel Goods Receipt",
+   "to": "Clear Invoice",
+   "cases": 24
+  },
+  {
+   "from": "Change Price",
+   "to": "Record Service Entry Sheet",
+   "cases": 24
+  },
+  {
+   "from": "Clear Invoice",
+   "to": "SRM: Created",
+   "cases": 24
+  },
+  {
+   "from": "Receive Order Confirmation",
+   "to": "Vendor creates debit memo",
+   "cases": 24
+  },
+  {
+   "from": "Block Purchase Order Item",
+   "to": "Vendor creates invoice",
+   "cases": 23
+  },
+  {
+   "from": "Change Quantity",
+   "to": "Block Purchase Order Item",
+   "cases": 23
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "Release Purchase Order",
+   "cases": 22
+  },
+  {
+   "from": "Change Currency",
+   "to": "Vendor creates invoice",
+   "cases": 21
+  },
+  {
+   "from": "Record Invoice Receipt",
+   "to": "Change Storage Location",
+   "cases": 21
+  },
+  {
+   "from": "Reactivate Purchase Order Item",
+   "to": "Record Invoice Receipt",
+   "cases": 20
+  },
+  {
+   "from": "Record Service Entry Sheet",
+   "to": "Cancel Invoice Receipt",
+   "cases": 20
+  },
+  {
+   "from": "SRM: Deleted",
+   "to": "Record Goods Receipt",
+   "cases": 20
+  },
+  {
+   "from": "SRM: In Transfer to Execution Syst.",
+   "to": "Record Goods Receipt",
+   "cases": 19
+  },
+  {
+   "from": "Change Storage Location",
+   "to": "Change Price",
+   "cases": 18
+  },
+  {
+   "from": "Cancel Goods Receipt",
+   "to": "Remove Payment Block",
+   "cases": 17
+  },
+  {
+   "from": "Change Delivery Indicator",
+   "to": "Delete Purchase Order Item",
+   "cases": 17
+  },
+  {
+   "from": "Delete Purchase Order Item",
+   "to": "Release Purchase Order",
+   "cases": 16
+  },
+  {
+   "from": "Update Order Confirmation",
+   "to": "Change Quantity",
+   "cases": 16
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "Update Order Confirmation",
+   "cases": 16
+  },
+  {
+   "from": "Cancel Invoice Receipt",
+   "to": "Record Goods Receipt",
+   "cases": 15
+  },
+  {
+   "from": "Reactivate Purchase Order Item",
+   "to": "Change Price",
+   "cases": 15
+  },
+  {
+   "from": "Record Goods Receipt",
+   "to": "Block Purchase Order Item",
+   "cases": 15
+  },
+  {
+   "from": "SRM: Deleted",
+   "to": "Delete Purchase Order Item",
+   "cases": 15
+  },
+  {
+   "from": "SRM: In Transfer to Execution Syst.",
+   "to": "SRM: In Transfer to Execution Syst.",
+   "cases": 15
+  },
+  {
+   "from": "Update Order Confirmation",
+   "to": "Update Order Confirmation",
+   "cases": 15
+  },
+  {
+   "from": "Change Delivery Indicator",
+   "to": "Change Price",
+   "cases": 14
+  },
+  {
+   "from": "Change Storage Location",
+   "to": "Delete Purchase Order Item",
+   "cases": 14
+  },
+  {
+   "from": "Remove Payment Block",
+   "to": "Set Payment Block",
+   "cases": 14
+  },
+  {
+   "from": "Cancel Invoice Receipt",
+   "to": "Change Delivery Indicator",
+   "cases": 13
+  },
+  {
+   "from": "Change Quantity",
+   "to": "Change Storage Location",
+   "cases": 13
+  },
+  {
+   "from": "Change Quantity",
+   "to": "Update Order Confirmation",
+   "cases": 13
+  },
+  {
+   "from": "Record Service Entry Sheet",
+   "to": "Remove Payment Block",
+   "cases": 13
+  },
+  {
+   "from": "SRM: Change was Transmitted",
+   "to": "SRM: Created",
+   "cases": 13
+  },
+  {
+   "from": "Update Order Confirmation",
+   "to": "Delete Purchase Order Item",
+   "cases": 13
+  },
+  {
+   "from": "Vendor creates debit memo",
+   "to": "Change Delivery Indicator",
+   "cases": 13
+  },
+  {
+   "from": "Vendor creates debit memo",
+   "to": "Vendor creates debit memo",
+   "cases": 13
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "Delete Purchase Order Item",
+   "cases": 13
+  },
+  {
+   "from": "Change Quantity",
+   "to": "Cancel Invoice Receipt",
+   "cases": 12
+  },
+  {
+   "from": "Create Purchase Order Item",
+   "to": "SRM: Ordered",
+   "cases": 12
+  },
+  {
+   "from": "SRM: In Transfer to Execution Syst.",
+   "to": "Change Delivery Indicator",
+   "cases": 12
+  },
+  {
+   "from": "Cancel Invoice Receipt",
+   "to": "Record Subsequent Invoice",
+   "cases": 11
+  },
+  {
+   "from": "Record Invoice Receipt",
+   "to": "Receive Order Confirmation",
+   "cases": 11
+  },
+  {
+   "from": "Record Service Entry Sheet",
+   "to": "SRM: Created",
+   "cases": 11
+  },
+  {
+   "from": "Cancel Invoice Receipt",
+   "to": "Cancel Goods Receipt",
+   "cases": 10
+  },
+  {
+   "from": "Change Approval for Purchase Order",
+   "to": "Change Storage Location",
+   "cases": 10
+  },
+  {
+   "from": "Change Delivery Indicator",
+   "to": "Cancel Goods Receipt",
+   "cases": 10
+  },
+  {
+   "from": "Release Purchase Order",
+   "to": "Vendor creates invoice",
+   "cases": 10
+  },
+  {
+   "from": "Set Payment Block",
+   "to": "Remove Payment Block",
+   "cases": 10
+  },
+  {
+   "from": "Cancel Subsequent Invoice",
+   "to": "Record Invoice Receipt",
+   "cases": 9
+  },
+  {
+   "from": "Change Price",
+   "to": "Block Purchase Order Item",
+   "cases": 9
+  },
+  {
+   "from": "Delete Purchase Order Item",
+   "to": "Clear Invoice",
+   "cases": 9
+  },
+  {
+   "from": "Reactivate Purchase Order Item",
+   "to": "Block Purchase Order Item",
+   "cases": 9
+  },
+  {
+   "from": "Record Invoice Receipt",
+   "to": "SRM: In Transfer to Execution Syst.",
+   "cases": 9
+  },
+  {
+   "from": "Release Purchase Order",
+   "to": "Delete Purchase Order Item",
+   "cases": 9
+  },
+  {
+   "from": "Cancel Subsequent Invoice",
+   "to": "Record Subsequent Invoice",
+   "cases": 8
+  },
+  {
+   "from": "Change Storage Location",
+   "to": "Cancel Goods Receipt",
+   "cases": 8
+  },
+  {
+   "from": "Receive Order Confirmation",
+   "to": "Change Delivery Indicator",
+   "cases": 8
+  },
+  {
+   "from": "Record Goods Receipt",
+   "to": "Delete Purchase Order Item",
+   "cases": 8
+  },
+  {
+   "from": "Release Purchase Order",
+   "to": "Create Purchase Order Item",
+   "cases": 8
+  },
+  {
+   "from": "Remove Payment Block",
+   "to": "Record Subsequent Invoice",
+   "cases": 8
+  },
+  {
+   "from": "SRM: Change was Transmitted",
+   "to": "Record Invoice Receipt",
+   "cases": 8
+  },
+  {
+   "from": "SRM: In Transfer to Execution Syst.",
+   "to": "Change Price",
+   "cases": 8
+  },
+  {
+   "from": "Set Payment Block",
+   "to": "Change Approval for Purchase Order",
+   "cases": 8
+  },
+  {
+   "from": "Change Approval for Purchase Order",
+   "to": "Reactivate Purchase Order Item",
+   "cases": 7
+  },
+  {
+   "from": "Change Price",
+   "to": "Record Subsequent Invoice",
+   "cases": 7
+  },
+  {
+   "from": "Change Storage Location",
+   "to": "Clear Invoice",
+   "cases": 7
+  },
+  {
+   "from": "Record Goods Receipt",
+   "to": "Change Storage Location",
+   "cases": 7
+  },
+  {
+   "from": "Remove Payment Block",
+   "to": "Record Service Entry Sheet",
+   "cases": 7
+  },
+  {
+   "from": "SRM: Change was Transmitted",
+   "to": "Record Service Entry Sheet",
+   "cases": 7
+  },
+  {
+   "from": "SRM: Deleted",
+   "to": "SRM: In Transfer to Execution Syst.",
+   "cases": 7
+  },
+  {
+   "from": "Update Order Confirmation",
+   "to": "Record Invoice Receipt",
+   "cases": 7
+  },
+  {
+   "from": "Vendor creates debit memo",
+   "to": "Record Service Entry Sheet",
+   "cases": 7
+  },
+  {
+   "from": "Vendor creates debit memo",
+   "to": "SRM: Created",
+   "cases": 7
+  },
+  {
+   "from": "Cancel Invoice Receipt",
+   "to": "Delete Purchase Order Item",
+   "cases": 6
+  },
+  {
+   "from": "Change Delivery Indicator",
+   "to": "Block Purchase Order Item",
+   "cases": 6
+  },
+  {
+   "from": "Change Storage Location",
+   "to": "Record Invoice Receipt",
+   "cases": 6
+  },
+  {
+   "from": "Delete Purchase Order Item",
+   "to": "Change Delivery Indicator",
+   "cases": 6
+  },
+  {
+   "from": "Reactivate Purchase Order Item",
+   "to": "Receive Order Confirmation",
+   "cases": 6
+  },
+  {
+   "from": "Record Goods Receipt",
+   "to": "Update Order Confirmation",
+   "cases": 6
+  },
+  {
+   "from": "Record Invoice Receipt",
+   "to": "Update Order Confirmation",
+   "cases": 6
+  },
+  {
+   "from": "Record Subsequent Invoice",
+   "to": "Cancel Subsequent Invoice",
+   "cases": 6
+  },
+  {
+   "from": "SRM: Change was Transmitted",
+   "to": "Vendor creates debit memo",
+   "cases": 6
+  },
+  {
+   "from": "SRM: Created",
+   "to": "Record Goods Receipt",
+   "cases": 6
+  },
+  {
+   "from": "SRM: Created",
+   "to": "SRM: Created",
+   "cases": 6
+  },
+  {
+   "from": "SRM: Created",
+   "to": "SRM: Incomplete",
+   "cases": 6
+  },
+  {
+   "from": "SRM: Document Completed",
+   "to": "Vendor creates invoice",
+   "cases": 6
+  },
+  {
+   "from": "SRM: Held",
+   "to": "SRM: Complete",
+   "cases": 6
+  },
+  {
+   "from": "SRM: Incomplete",
+   "to": "SRM: Held",
+   "cases": 6
+  },
+  {
+   "from": "Cancel Invoice Receipt",
+   "to": "Change Price",
+   "cases": 5
+  },
+  {
+   "from": "Cancel Subsequent Invoice",
+   "to": "Vendor creates debit memo",
+   "cases": 5
+  },
+  {
+   "from": "Change Approval for Purchase Order",
+   "to": "Vendor creates debit memo",
+   "cases": 5
+  },
+  {
+   "from": "Change Delivery Indicator",
+   "to": "Change Final Invoice Indicator",
+   "cases": 5
+  },
+  {
+   "from": "Change Storage Location",
+   "to": "Receive Order Confirmation",
+   "cases": 5
+  },
+  {
+   "from": "Record Goods Receipt",
+   "to": "Cancel Subsequent Invoice",
+   "cases": 5
+  },
+  {
+   "from": "Record Goods Receipt",
+   "to": "SRM: Complete",
+   "cases": 5
+  },
+  {
+   "from": "SRM: Deleted",
+   "to": "Change Delivery Indicator",
+   "cases": 5
+  },
+  {
+   "from": "SRM: Document Completed",
+   "to": "SRM: Change was Transmitted",
+   "cases": 5
+  },
+  {
+   "from": "SRM: In Transfer to Execution Syst.",
+   "to": "SRM: Created",
+   "cases": 5
+  },
+  {
+   "from": "Update Order Confirmation",
+   "to": "Clear Invoice",
+   "cases": 5
+  },
+  {
+   "from": "Vendor creates debit memo",
+   "to": "Reactivate Purchase Order Item",
+   "cases": 5
+  },
+  {
+   "from": "Cancel Goods Receipt",
+   "to": "SRM: Created",
+   "cases": 4
+  },
+  {
+   "from": "Cancel Subsequent Invoice",
+   "to": "Record Goods Receipt",
+   "cases": 4
+  },
+  {
+   "from": "Change Final Invoice Indicator",
+   "to": "Clear Invoice",
+   "cases": 4
+  },
+  {
+   "from": "Change Price",
+   "to": "Cancel Subsequent Invoice",
+   "cases": 4
+  },
+  {
+   "from": "Change Price",
+   "to": "SRM: Created",
+   "cases": 4
+  },
+  {
+   "from": "Change Price",
+   "to": "Update Order Confirmation",
+   "cases": 4
+  },
+  {
+   "from": "Change payment term",
+   "to": "Record Goods Receipt",
+   "cases": 4
+  },
+  {
+   "from": "Create Purchase Order Item",
+   "to": "Change Currency",
+   "cases": 4
+  },
+  {
+   "from": "Delete Purchase Order Item",
+   "to": "Remove Payment Block",
+   "cases": 4
+  },
+  {
+   "from": "Receive Order Confirmation",
+   "to": "Change Storage Location",
+   "cases": 4
+  },
+  {
+   "from": "Record Service Entry Sheet",
+   "to": "SRM: Complete",
+   "cases": 4
+  },
+  {
+   "from": "Record Subsequent Invoice",
+   "to": "Record Subsequent Invoice",
+   "cases": 4
+  },
+  {
+   "from": "Remove Payment Block",
+   "to": "Change Approval for Purchase Order",
+   "cases": 4
+  },
+  {
+   "from": "Remove Payment Block",
+   "to": "Delete Purchase Order Item",
+   "cases": 4
+  },
+  {
+   "from": "SRM: Deleted",
+   "to": "Change Final Invoice Indicator",
+   "cases": 4
+  },
+  {
+   "from": "SRM: Deleted",
+   "to": "Record Invoice Receipt",
+   "cases": 4
+  },
+  {
+   "from": "SRM: Deleted",
+   "to": "SRM: Complete",
+   "cases": 4
+  },
+  {
+   "from": "SRM: Document Completed",
+   "to": "Record Invoice Receipt",
+   "cases": 4
+  },
+  {
+   "from": "Vendor creates debit memo",
+   "to": "Create Purchase Requisition Item",
+   "cases": 4
+  },
+  {
+   "from": "Vendor creates debit memo",
+   "to": "Record Subsequent Invoice",
+   "cases": 4
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "Cancel Subsequent Invoice",
+   "cases": 4
+  },
+  {
+   "from": "Vendor creates invoice",
+   "to": "Set Payment Block",
+   "cases": 4
+  },
+  {
+   "from": "Cancel Goods Receipt",
+   "to": "Change Storage Location",
+   "cases": 3
+  },
+  {
+   "from": "Cancel Invoice Receipt",
+   "to": "Cancel Subsequent Invoice",
+   "cases": 3
+  },
+  {
+   "from": "Cancel Invoice Receipt",
+   "to": "Change Quantity",
+   "cases": 3
+  },
+  {
+   "from": "Cancel Subsequent Invoice",
+   "to": "Cancel Invoice Receipt",
+   "cases": 3
+  },
+  {
+   "from": "Change Approval for Purchase Order",
+   "to": "Cancel Goods Receipt",
+   "cases": 3
+  },
+  {
+   "from": "Change Approval for Purchase Order",
+   "to": "Remove Payment Block",
+   "cases": 3
+  },
+  {
+   "from": "Clear Invoice",
+   "to": "Block Purchase Order Item",
+   "cases": 3
+  },
+  {
+   "from": "Clear Invoice",
+   "to": "Set Payment Block",
+   "cases": 3
+  },
+  {
+   "from": "Create Purchase Order Item",
+   "to": "Change payment term",
+   "cases": 3
+  },
+  {
+   "from": "Delete Purchase Order Item",
+   "to": "SRM: Transaction Completed",
+   "cases": 3
+  },
+  {
+   "from": "Reactivate Purchase Order Item",
+   "to": "Change Delivery Indicator",
+   "cases": 3
+  },
+  {
+   "from": "Receive Order Confirmation",
+   "to": "Clear Invoice",
+   "cases": 3
+  },
+  {
+   "from": "Record Invoice Receipt",
+   "to": "Delete Purchase Order Item",
+   "cases": 3
+  },
+  {
+   "from": "Record Subsequent Invoice",
+   "to": "Vendor creates invoice",
+   "cases": 3
+  },
+  {
+   "from": "Release Purchase Order",
+   "to": "Clear Invoice",
+   "cases": 3
+  },
+  {
+   "from": "SRM: Created",
+   "to": "Record Service Entry Sheet",
+   "cases": 3
+  },
+  {
+   "from": "SRM: Deleted",
+   "to": "Clear Invoice",
+   "cases": 3
+  },
+  {
+   "from": "SRM: Deleted",
+   "to": "Vendor creates invoice",
+   "cases": 3
+  },
+  {
+   "from": "Update Order Confirmation",
+   "to": "Change Price",
+   "cases": 3
+  },
+  {
+   "from": "Block Purchase Order Item",
+   "to": "Clear Invoice",
+   "cases": 2
+  },
+  {
+   "from": "Cancel Goods Receipt",
+   "to": "Release Purchase Order",
+   "cases": 2
+  },
+  {
+   "from": "Cancel Goods Receipt",
+   "to": "SRM: Complete",
+   "cases": 2
+  },
+  {
+   "from": "Cancel Subsequent Invoice",
+   "to": "Cancel Subsequent Invoice",
+   "cases": 2
+  },
+  {
+   "from": "Cancel Subsequent Invoice",
+   "to": "Change Price",
+   "cases": 2
+  },
+  {
+   "from": "Cancel Subsequent Invoice",
+   "to": "Vendor creates invoice",
+   "cases": 2
+  },
+  {
+   "from": "Change Approval for Purchase Order",
+   "to": "Cancel Invoice Receipt",
+   "cases": 2
+  },
+  {
+   "from": "Change Currency",
+   "to": "Change Price",
+   "cases": 2
+  },
+  {
+   "from": "Change Currency",
+   "to": "Change payment term",
+   "cases": 2
+  },
+  {
+   "from": "Change Currency",
+   "to": "Create Purchase Order Item",
+   "cases": 2
+  },
+  {
+   "from": "Change Currency",
+   "to": "Delete Purchase Order Item",
+   "cases": 2
+  },
+  {
+   "from": "Change Currency",
+   "to": "Record Goods Receipt",
+   "cases": 2
+  },
+  {
+   "from": "Change Currency",
+   "to": "Vendor creates debit memo",
+   "cases": 2
+  },
+  {
+   "from": "Change Delivery Indicator",
+   "to": "Cancel Subsequent Invoice",
+   "cases": 2
+  },
+  {
+   "from": "Change Delivery Indicator",
+   "to": "Record Subsequent Invoice",
+   "cases": 2
+  },
+  {
+   "from": "Change Price",
+   "to": "Change payment term",
+   "cases": 2
+  },
+  {
+   "from": "Change Price",
+   "to": "SRM: In Transfer to Execution Syst.",
+   "cases": 2
+  },
+  {
+   "from": "Change Price",
+   "to": "SRM: Transaction Completed",
+   "cases": 2
+  },
+  {
+   "from": "Change Quantity",
+   "to": "Cancel Subsequent Invoice",
+   "cases": 2
+  },
+  {
+   "from": "Change Storage Location",
+   "to": "Change Delivery Indicator",
+   "cases": 2
+  },
+  {
+   "from": "Clear Invoice",
+   "to": "Change Storage Location",
+   "cases": 2
+  },
+  {
+   "from": "Clear Invoice",
+   "to": "SRM: Complete",
+   "cases": 2
+  },
+  {
+   "from": "Clear Invoice",
+   "to": "SRM: Ordered",
+   "cases": 2
+  },
+  {
+   "from": "Reactivate Purchase Order Item",
+   "to": "Cancel Goods Receipt",
+   "cases": 2
+  },
+  {
+   "from": "Record Goods Receipt",
+   "to": "SRM: Created",
+   "cases": 2
+  },
+  {
+   "from": "Record Invoice Receipt",
+   "to": "SRM: Ordered",
+   "cases": 2
+  },
+  {
+   "from": "Record Subsequent Invoice",
+   "to": "Cancel Invoice Receipt",
+   "cases": 2
+  },
+  {
+   "from": "Record Subsequent Invoice",
+   "to": "Change Price",
+   "cases": 2
+  },
+  {
+   "from": "SRM: Created",
+   "to": "Cancel Goods Receipt",
+   "cases": 2
+  },
+  {
+   "from": "SRM: Created",
+   "to": "Clear Invoice",
+   "cases": 2
+  },
+  {
+   "from": "SRM: Deleted",
+   "to": "Record Service Entry Sheet",
+   "cases": 2
+  },
+  {
+   "from": "SRM: Document Completed",
+   "to": "Clear Invoice",
+   "cases": 2
+  },
+  {
+   "from": "SRM: In Transfer to Execution Syst.",
+   "to": "SRM: Transaction Completed",
+   "cases": 2
+  },
+  {
+   "from": "SRM: Ordered",
+   "to": "SRM: Document Completed",
+   "cases": 2
+  },
+  {
+   "from": "Update Order Confirmation",
+   "to": "Receive Order Confirmation",
+   "cases": 2
+  },
+  {
+   "from": "Block Purchase Order Item",
+   "to": "Vendor creates debit memo",
+   "cases": 1
+  },
+  {
+   "from": "Cancel Goods Receipt",
+   "to": "Block Purchase Order Item",
+   "cases": 1
+  },
+  {
+   "from": "Cancel Goods Receipt",
+   "to": "Change Approval for Purchase Order",
+   "cases": 1
+  },
+  {
+   "from": "Cancel Goods Receipt",
+   "to": "SRM: Ordered",
+   "cases": 1
+  },
+  {
+   "from": "Cancel Invoice Receipt",
+   "to": "Record Service Entry Sheet",
+   "cases": 1
+  },
+  {
+   "from": "Change Currency",
+   "to": "Change Quantity",
+   "cases": 1
+  },
+  {
+   "from": "Change Delivery Indicator",
+   "to": "Change Storage Location",
+   "cases": 1
+  },
+  {
+   "from": "Change Delivery Indicator",
+   "to": "Reactivate Purchase Order Item",
+   "cases": 1
+  },
+  {
+   "from": "Change Delivery Indicator",
+   "to": "Release Purchase Order",
+   "cases": 1
+  },
+  {
+   "from": "Change Delivery Indicator",
+   "to": "SRM: Created",
+   "cases": 1
+  },
+  {
+   "from": "Change Final Invoice Indicator",
+   "to": "Record Goods Receipt",
+   "cases": 1
+  },
+  {
+   "from": "Change Final Invoice Indicator",
+   "to": "Record Invoice Receipt",
+   "cases": 1
+  },
+  {
+   "from": "Change Final Invoice Indicator",
+   "to": "SRM: Complete",
+   "cases": 1
+  },
+  {
+   "from": "Change Final Invoice Indicator",
+   "to": "SRM: In Transfer to Execution Syst.",
+   "cases": 1
+  },
+  {
+   "from": "Change Price",
+   "to": "Change Final Invoice Indicator",
+   "cases": 1
+  },
+  {
+   "from": "Change Price",
+   "to": "SRM: Complete",
+   "cases": 1
+  },
+  {
+   "from": "Change Rejection Indicator",
+   "to": "Change Rejection Indicator",
+   "cases": 1
+  },
+  {
+   "from": "Change Rejection Indicator",
+   "to": "Reactivate Purchase Order Item",
+   "cases": 1
+  },
+  {
+   "from": "Change Storage Location",
+   "to": "Block Purchase Order Item",
+   "cases": 1
+  },
+  {
+   "from": "Change Storage Location",
+   "to": "Release Purchase Order",
+   "cases": 1
+  },
+  {
+   "from": "Change Storage Location",
+   "to": "Remove Payment Block",
+   "cases": 1
+  },
+  {
+   "from": "Change payment term",
+   "to": "Change Price",
+   "cases": 1
+  },
+  {
+   "from": "Change payment term",
+   "to": "Change Storage Location",
+   "cases": 1
+  },
+  {
+   "from": "Create Purchase Order Item",
+   "to": "Change Final Invoice Indicator",
+   "cases": 1
+  },
+  {
+   "from": "Create Purchase Order Item",
+   "to": "SRM: Complete",
+   "cases": 1
+  },
+  {
+   "from": "Create Purchase Order Item",
+   "to": "SRM: Transaction Completed",
+   "cases": 1
+  },
+  {
+   "from": "Create Purchase Order Item",
+   "to": "Update Order Confirmation",
+   "cases": 1
+  },
+  {
+   "from": "Delete Purchase Order Item",
+   "to": "Change Rejection Indicator",
+   "cases": 1
+  },
+  {
+   "from": "Delete Purchase Order Item",
+   "to": "Delete Purchase Order Item",
+   "cases": 1
+  },
+  {
+   "from": "Delete Purchase Order Item",
+   "to": "SRM: In Transfer to Execution Syst.",
+   "cases": 1
+  },
+  {
+   "from": "Delete Purchase Order Item",
+   "to": "Vendor creates debit memo",
+   "cases": 1
+  },
+  {
+   "from": "Reactivate Purchase Order Item",
+   "to": "Change Storage Location",
+   "cases": 1
+  },
+  {
+   "from": "Reactivate Purchase Order Item",
+   "to": "Clear Invoice",
+   "cases": 1
+  },
+  {
+   "from": "Reactivate Purchase Order Item",
+   "to": "Remove Payment Block",
+   "cases": 1
+  },
+  {
+   "from": "Receive Order Confirmation",
+   "to": "Cancel Goods Receipt",
+   "cases": 1
+  },
+  {
+   "from": "Receive Order Confirmation",
+   "to": "Change Approval for Purchase Order",
+   "cases": 1
+  },
+  {
+   "from": "Record Invoice Receipt",
+   "to": "SRM: Complete",
+   "cases": 1
+  },
+  {
+   "from": "Record Service Entry Sheet",
+   "to": "Cancel Subsequent Invoice",
+   "cases": 1
+  },
+  {
+   "from": "Record Service Entry Sheet",
+   "to": "SRM: In Transfer to Execution Syst.",
+   "cases": 1
+  },
+  {
+   "from": "Record Service Entry Sheet",
+   "to": "SRM: Ordered",
+   "cases": 1
+  },
+  {
+   "from": "Record Subsequent Invoice",
+   "to": "Record Goods Receipt",
+   "cases": 1
+  },
+  {
+   "from": "Release Purchase Order",
+   "to": "Remove Payment Block",
+   "cases": 1
+  },
+  {
+   "from": "Remove Payment Block",
+   "to": "Change Storage Location",
+   "cases": 1
+  },
+  {
+   "from": "Remove Payment Block",
+   "to": "Receive Order Confirmation",
+   "cases": 1
+  },
+  {
+   "from": "Remove Payment Block",
+   "to": "Update Order Confirmation",
+   "cases": 1
+  },
+  {
+   "from": "SRM: Awaiting Approval",
+   "to": "SRM: In Transfer to Execution Syst.",
+   "cases": 1
+  },
+  {
+   "from": "SRM: Awaiting Approval",
+   "to": "SRM: Ordered",
+   "cases": 1
+  },
+  {
+   "from": "SRM: Change was Transmitted",
+   "to": "SRM: Complete",
+   "cases": 1
+  },
+  {
+   "from": "SRM: Created",
+   "to": "Create Purchase Order Item",
+   "cases": 1
+  },
+  {
+   "from": "SRM: Created",
+   "to": "Record Invoice Receipt",
+   "cases": 1
+  },
+  {
+   "from": "SRM: Created",
+   "to": "SRM: In Transfer to Execution Syst.",
+   "cases": 1
+  },
+  {
+   "from": "SRM: Created",
+   "to": "SRM: Ordered",
+   "cases": 1
+  },
+  {
+   "from": "SRM: Deleted",
+   "to": "Change Quantity",
+   "cases": 1
+  },
+  {
+   "from": "SRM: Deleted",
+   "to": "SRM: Created",
+   "cases": 1
+  },
+  {
+   "from": "SRM: Document Completed",
+   "to": "Cancel Goods Receipt",
+   "cases": 1
+  },
+  {
+   "from": "SRM: Document Completed",
+   "to": "SRM: Created",
+   "cases": 1
+  },
+  {
+   "from": "SRM: In Transfer to Execution Syst.",
+   "to": "Cancel Goods Receipt",
+   "cases": 1
+  },
+  {
+   "from": "SRM: In Transfer to Execution Syst.",
+   "to": "Delete Purchase Order Item",
+   "cases": 1
+  },
+  {
+   "from": "SRM: In Transfer to Execution Syst.",
+   "to": "Record Invoice Receipt",
+   "cases": 1
+  },
+  {
+   "from": "SRM: In Transfer to Execution Syst.",
+   "to": "Record Service Entry Sheet",
+   "cases": 1
+  },
+  {
+   "from": "SRM: In Transfer to Execution Syst.",
+   "to": "Remove Payment Block",
+   "cases": 1
+  },
+  {
+   "from": "SRM: In Transfer to Execution Syst.",
+   "to": "SRM: Complete",
+   "cases": 1
+  },
+  {
+   "from": "SRM: In Transfer to Execution Syst.",
+   "to": "Vendor creates invoice",
+   "cases": 1
+  },
+  {
+   "from": "SRM: Ordered",
+   "to": "Vendor creates invoice",
+   "cases": 1
+  },
+  {
+   "from": "SRM: Transaction Completed",
+   "to": "Change Delivery Indicator",
+   "cases": 1
+  },
+  {
+   "from": "SRM: Transaction Completed",
+   "to": "SRM: In Transfer to Execution Syst.",
+   "cases": 1
+  },
+  {
+   "from": "SRM: Transfer Failed (E.Sys.)",
+   "to": "Vendor creates invoice",
+   "cases": 1
+  },
+  {
+   "from": "Set Payment Block",
+   "to": "Cancel Invoice Receipt",
+   "cases": 1
+  },
+  {
+   "from": "Set Payment Block",
+   "to": "Cancel Subsequent Invoice",
+   "cases": 1
+  },
+  {
+   "from": "Set Payment Block",
+   "to": "Change Price",
+   "cases": 1
+  },
+  {
+   "from": "Update Order Confirmation",
+   "to": "Vendor creates debit memo",
+   "cases": 1
+  },
+  {
+   "from": "Vendor creates debit memo",
+   "to": "Delete Purchase Order Item",
+   "cases": 1
+  }
+ ]
+}

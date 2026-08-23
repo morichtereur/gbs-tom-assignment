@@ -1,5 +1,7 @@
 # GBS target operating model — purchase-to-pay
 
+[![Tests](https://github.com/morichtereur/gbs-tom-assignment/actions/workflows/test.yml/badge.svg)](https://github.com/morichtereur/gbs-tom-assignment/actions/workflows/test.yml)
+
 A target operating model arrives as four columns on a slide: retained, captive,
 provider, automated, with the activities sorted into them by the people whose
 functions are being sorted. The expensive part of that model is not where an

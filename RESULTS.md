@@ -9,6 +9,14 @@ Purchase-to-pay only. Every figure below is reproduced by `make run`.
 
 The defensible range for coordination cost was set at USD 0.25–4.00 per handoff from handling minutes and the wage panel, before the sweep was run.
 
+## The answer
+
+**Concentrating purchase-to-pay pays only above USD 3.38 per handoff** — the top half of the defensible range of USD 0.25–4.00. At that price 22 of 29 activities change unit at once.
+
+**On the positions the model actually decides, the workshop answer is wrong 100% of the time** — 13 of 13. The raw pre-registered figure is 90%, inflated by ties.
+
+**The model decides 13 of 29 positions.** The other 16 are ties and are left undecided. The deliverable is a price and a set of bands, not a target operating model.
+
 ## Scale
 
 | | |
@@ -24,7 +32,9 @@ The defensible range for coordination cost was set at USD 0.25–4.00 per handof
 
 ## 1. The headline
 
-**90%** of assignable activities sit somewhere different in the solver optimum than in the naive baseline (26 of 29).
+**90%** of assignable activities sit somewhere different in the solver optimum than in the naive baseline (26 of 29). That is the metric as registered, and taken alone it flatters the solver.
+
+Restricted to the 13 positions the cost model actually decides, **100%** differ (13 of 13). The gap between the two numbers is activities the model does not place: they disagree with the baseline by accident, not by argument. The registered metric is the first number; the one worth quoting is the second.
 
 | | naive baseline | solver optimum |
 |---|---:|---:|
@@ -116,39 +126,39 @@ The ported taxonomy decides 17% of activity names — 41% of events — and its 
 
 10,000 draws over handling minutes, the provider and captive multipliers, the automation run cost, the coordination price, the authored ISCO mapping, and the classifier's own measured error rate.
 
-**8 of 29** activities hold the same unit in at least 75% of draws. The other 21 are reported as unstable and are not given a position.
+**7 of 29** activities hold the same unit in at least 75% of draws. The other 22 are reported as unstable and are not given a position.
 
 | activity | modal unit | holds in | verdict |
 |---|---|---:|---|
 | Create Purchase Requisition Item | automated | 100% | stable |
 | Remove Payment Block | automated | 100% | stable |
 | Cancel Invoice Receipt | automated | 100% | stable |
-| SRM: Transfer Failed (E.Sys.) | captive@in:Bangalore | 90% | stable |
 | Receive Order Confirmation | automated | 89% | stable |
-| Cancel Subsequent Invoice | provider@pl:Poznań | 88% | stable |
 | Update Order Confirmation | automated | 87% | stable |
-| Change Final Invoice Indicator | captive@in:Bangalore | 75% | stable |
-| Record Service Entry Sheet | captive@in:Bangalore | 75% | **unstable** |
-| Create Purchase Order Item | captive@in:Bangalore | 75% | **unstable** |
-| Record Goods Receipt | captive@in:Bangalore | 75% | **unstable** |
-| Release Purchase Requisition | captive@in:Bangalore | 75% | **unstable** |
-| Change Storage Location | captive@in:Bangalore | 75% | **unstable** |
+| Cancel Subsequent Invoice | provider@pl:Poznań | 85% | stable |
+| SRM: Transfer Failed (E.Sys.) | captive@in:Hyderabad | 75% | stable |
 | Change Quantity | provider@pl:Wrocław | 74% | **unstable** |
-| Clear Invoice | captive@in:Bangalore | 74% | **unstable** |
-| Change Delivery Indicator | captive@in:Bangalore | 74% | **unstable** |
-| Cancel Goods Receipt | captive@in:Bangalore | 74% | **unstable** |
 | Change Price | provider@pl:Wrocław | 74% | **unstable** |
-| Record Subsequent Invoice | captive@in:Bangalore | 73% | **unstable** |
 | Change Currency | provider@pl:Wrocław | 70% | **unstable** |
-| Record Invoice Receipt | captive@in:Hyderabad | 66% | **unstable** |
-| Change payment term | provider@pl:Poznań | 66% | **unstable** |
-| Set Payment Block | captive@in:Hyderabad | 66% | **unstable** |
-| Change Rejection Indicator | captive@in:Bangalore | 61% | **unstable** |
-| Reactivate Purchase Order Item | captive@in:Bangalore | 61% | **unstable** |
-| Block Purchase Order Item | captive@in:Hyderabad | 60% | **unstable** |
+| Change payment term | provider@pl:Poznań | 60% | **unstable** |
 | Change Approval for Purchase Order | provider@pl:Wrocław | 58% | **unstable** |
 | Delete Purchase Order Item | provider@pl:Wrocław | 56% | **unstable** |
+| Change Final Invoice Indicator | captive@in:Hyderabad | 56% | **unstable** |
+| Change Delivery Indicator | captive@in:Hyderabad | 56% | **unstable** |
+| Record Service Entry Sheet | captive@in:Hyderabad | 55% | **unstable** |
+| Release Purchase Requisition | captive@in:Hyderabad | 55% | **unstable** |
+| Change Storage Location | captive@in:Hyderabad | 55% | **unstable** |
+| Cancel Goods Receipt | captive@in:Hyderabad | 55% | **unstable** |
+| Create Purchase Order Item | captive@in:Hyderabad | 55% | **unstable** |
+| Record Goods Receipt | captive@in:Hyderabad | 55% | **unstable** |
+| Clear Invoice | captive@in:Hyderabad | 55% | **unstable** |
+| Record Subsequent Invoice | captive@in:Hyderabad | 54% | **unstable** |
 | Release Purchase Order | provider@pl:Wrocław | 50% | **unstable** |
+| Record Invoice Receipt | captive@in:Bangalore | 45% | **unstable** |
+| Block Purchase Order Item | captive@in:Hyderabad | 45% | **unstable** |
+| Set Payment Block | captive@in:Bangalore | 45% | **unstable** |
+| Change Rejection Indicator | captive@in:Hyderabad | 44% | **unstable** |
+| Reactivate Purchase Order Item | captive@in:Hyderabad | 43% | **unstable** |
 
 ## What the cost model cannot separate
 

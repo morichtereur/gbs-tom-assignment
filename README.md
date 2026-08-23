@@ -53,7 +53,7 @@ of bands, not a target operating model.
 ## What follows
 
 **1. Coordination is not a rounding error on this process.** At the declared
-price, crossing transitions cost 1.9x the wage bill they are coordinating.
+price, crossing transitions cost 1.85x the wage bill they are coordinating.
 The slide that sorts activities into four columns is silently taking a position
 on a number larger than the one it is optimising.
 

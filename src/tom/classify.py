@@ -134,13 +134,18 @@ def run(model: str | None = None, *, offline: bool = False) -> dict:
         for row in residual:
             label, reason = _model_label(client, model, row)
             labels[row["name"]] = Label(row["name"], label, "model", reason)
-    else:
-        for row in residual:
-            # Offline: the residual falls back to the taxonomy's own default.
-            # Recorded as such — a fallback label is not a classification.
-            labels[row["name"]] = Label(
-                row["name"], "transactional", "fallback", "offline: no model call"
-            )
+    elif residual:
+        # Offline stops here on purpose. Giving the residual a default label
+        # would hand the model 35 of 42 labels that nothing produced, and the
+        # solver would run on them without complaint. Refusing is the only
+        # honest option: a fallback label is not a classification.
+        raise RuntimeError(
+            f"stage 1 decided {len(labels)} of {len(labels) + len(residual)} "
+            f"activity names and stage 2 was not run, so there is no label set "
+            f"to write. That gap is the finding — see `make eval` — but it is "
+            f"not something to paper over with a default. Set ANTHROPIC_API_KEY "
+            f"and run `make classify`."
+        )
 
     decided_by_taxonomy = [n for n, l in labels.items() if l.source == "taxonomy"]
     events = {row["name"]: row["events"] for row in process["activities"]}
@@ -148,6 +153,7 @@ def run(model: str | None = None, *, offline: bool = False) -> dict:
 
     payload = {
         "model": None if offline else model,
+        "offline": offline,
         "taxonomy_source": provenance,
         "coverage": {
             # Two coverage numbers, because they say different things. The
@@ -174,7 +180,11 @@ def run(model: str | None = None, *, offline: bool = False) -> dict:
 
 def main() -> None:
     offline = "--offline" in sys.argv
-    payload = run(offline=offline)
+    try:
+        payload = run(offline=offline)
+    except RuntimeError as exc:
+        print(exc)
+        raise SystemExit(1)
     cov = payload["coverage"]
     print(
         f"stage 1 (ported taxonomy) decided {cov['decided_by_taxonomy']}/{cov['total']} "

@@ -15,7 +15,9 @@ from tom import ablation, forced as forced_ladder
 from tom.baseline import (
     cost_ties, difference_share, naive_baseline, rank_cities, single_city_optimum,
 )
-from tom.config import DATA, ROOT, excluded_transitions, load_instance
+from tom.config import (
+    DATA, ROOT, excluded_transitions, labels_are_classifier_output, load_instance,
+)
 from tom.solve import Scenario, forced_positions, solve
 from tom.sod import breaches
 from tom.sweep import (
@@ -71,10 +73,15 @@ def compute(instance: Instance | None = None, *, ladder: Sequence[float] = LADDE
     points = sweep(instance, ladder, scenario=scenario)
     # Forced-ness is a property of the price, not of the assignment, so it is
     # measured at every stop the page can show rather than once and reused.
+    # Only up to the control's ceiling: the ladder runs past it to find the
+    # tipping point, but the page never shows those prices and each probe is a
+    # full re-solve.
+    from tom.dashboard import CONTROL_MAX
+
     per_price = forced_ladder.over_ladder([
         {"price": p.price, "total": p.assignment.total_cost,
          "assignment": {k: v.key for k, v in p.assignment.units.items()}}
-        for p in points
+        for p in points if p.price <= CONTROL_MAX
     ])
     tipping, floor_crossings, floor_units = concentration_tipping_point(
         instance, scenario=scenario
@@ -102,6 +109,7 @@ def compute(instance: Instance | None = None, *, ladder: Sequence[float] = LADDE
             "defensible_range": [lo, hi],
             "handoff_price": price,
             "currency": settings.currency,
+            "labels_from_classifier": labels_are_classifier_output(),
         },
         "scale": {
             "activities": len(instance.activities),
@@ -116,10 +124,22 @@ def compute(instance: Instance | None = None, *, ladder: Sequence[float] = LADDE
         "headline": {
             "share": headline_share,
             "moved": list(headline_moved),
+            # The pre-registered metric counts every activity, and roughly half
+            # of them sit in a unit nothing decided. Those disagree with the
+            # baseline by accident. The metric is reported as registered and
+            # then again over the positions cost actually decides, because one
+            # of those two numbers means something and it is not the big one.
+            "moved_decided": sorted(
+                name for name in headline_moved
+                if forced.get(name, {}).get("forced")
+            ),
+            "decided_total": sum(1 for v in forced.values() if v["forced"]),
             "baseline_city": baseline_city,
             "baseline_cost": baseline.total_cost,
             "baseline_labour": baseline.labour_cost,
             "baseline_handoff": baseline.handoff_cost,
+            "baseline_overhead": baseline.overhead_cost,
+            "optimum_overhead": optimum.overhead_cost,
             "baseline_crossings": baseline.crossings,
             "baseline_sod_breaches": [list(b) for b in breaches(baseline.units)],
             "optimum_cost": optimum.total_cost,
@@ -185,6 +205,19 @@ def compute(instance: Instance | None = None, *, ladder: Sequence[float] = LADDE
             "tie_broken": sum(1 for v in forced.values() if not v["forced"]),
             "total": len(forced),
             "by_price": per_price,
+        },
+        "delivery_models": {
+            name: {
+                "used_at_declared_price": any(
+                    u.model == name for u in optimum.units.values()
+                ),
+                "used_anywhere_on_the_ladder": any(
+                    key.split("@")[0] == name
+                    for point in points
+                    for key in {v.key for v in point.assignment.units.values()}
+                ),
+            }
+            for name in settings.delivery_models
         },
         "optimum": {
             "cost": optimum.total_cost,
@@ -264,12 +297,39 @@ def to_markdown(r: dict) -> str:
     w("## The two metrics, fixed before the run\n")
     w(f"1. **{pre['headline']}**")
     w(f"2. **{pre['second']}**\n")
+    if not pre.get("labels_from_classifier", True):
+        w("> Run on the hand-labelled gold set rather than on classifier output. "
+          "The work-family split below is therefore exact by construction and "
+          "the resampling understates its own error. Run `make classify`.\n")
     w(f"The defensible range for coordination cost was set at "
       f"{cur} {lo:.2f}–{hi:.2f} per handoff from handling minutes and the wage "
       f"panel, before the sweep was run.\n")
 
     s = r["scale"]
     tr = s["transitions"]
+
+    decided_share = (
+        len(h["moved_decided"]) / h["decided_total"] if h["decided_total"] else 0.0
+    )
+    w("## The answer\n")
+    if t["price"] is not None:
+        placement = (
+            "the top half of" if t["inside_defensible_range"] else "outside"
+        )
+        w(f"**Concentrating purchase-to-pay pays only above "
+          f"{cur} {t['price']:.2f} per handoff** — {placement} "
+          f"the defensible range of {cur} {lo:.2f}–{hi:.2f}. At that price "
+          f"{t['activities_moved']} of {s['assignable']} activities change unit "
+          f"at once.\n")
+    w(f"**On the positions the model actually decides, the workshop answer is "
+      f"wrong {decided_share:.0%} of the time** — {len(h['moved_decided'])} of "
+      f"{h['decided_total']}. The raw pre-registered figure is {h['share']:.0%}, "
+      f"inflated by ties.\n")
+    w(f"**The model decides {r['forced']['forced']} of {r['forced']['total']} "
+      f"positions.** The other {r['forced']['tie_broken']} are ties and are left "
+      f"undecided. The deliverable is a price and a set of bands, not a target "
+      f"operating model.\n")
+
     w("## Scale\n")
     w(f"| | |\n|---|---:|")
     w(f"| Activities in the log | {s['activities']} |")
@@ -284,10 +344,21 @@ def to_markdown(r: dict) -> str:
     w("## 1. The headline\n")
     w(f"**{h['share']:.0%}** of assignable activities sit somewhere different in "
       f"the solver optimum than in the naive baseline "
-      f"({len(h['moved'])} of {s['assignable']}).\n")
+      f"({len(h['moved'])} of {s['assignable']}). That is the metric as "
+      f"registered, and taken alone it flatters the solver.\n")
+    decided_share = (
+        len(h["moved_decided"]) / h["decided_total"] if h["decided_total"] else 0.0
+    )
+    w(f"Restricted to the {h['decided_total']} positions the cost model actually "
+      f"decides, **{decided_share:.0%}** differ "
+      f"({len(h['moved_decided'])} of {h['decided_total']}). The gap between the "
+      f"two numbers is activities the model does not place: they disagree with "
+      f"the baseline by accident, not by argument. The registered metric is the "
+      f"first number; the one worth quoting is the second.\n")
     w(f"| | naive baseline | solver optimum |\n|---|---:|---:|")
     w(f"| Labour | {cur} {_money(h['baseline_labour'])} | {cur} {_money(h['optimum_labour'])} |")
     w(f"| Coordination | {cur} {_money(h['baseline_handoff'])} | {cur} {_money(h['optimum_handoff'])} |")
+    w(f"| Unit overhead | {cur} {_money(h['baseline_overhead'])} | {cur} {_money(h['optimum_overhead'])} |")
     w(f"| **Total** | **{cur} {_money(h['baseline_cost'])}** | **{cur} {_money(h['optimum_cost'])}** |")
     w(f"| Crossing transitions | {h['baseline_crossings']:,} | {h['optimum_crossings']:,} |")
     w(f"| Segregation-of-duties breaches | {len(h['baseline_sod_breaches'])} | 0 |\n")
@@ -346,14 +417,32 @@ def to_markdown(r: dict) -> str:
     w("")
 
     f = r["forced"]
+    unused = [
+        name for name, row in r["delivery_models"].items()
+        if not row["used_anywhere_on_the_ladder"]
+    ]
+    if unused:
+        w("## A column nobody fills\n")
+        w(f"The slide has four columns. At every price on the ladder, "
+          f"**{', '.join(unused)}** is empty.\n")
+        w("Nothing in the model requires work to stay onshore. The four "
+          "constraints are segregation of duties, minimum site size, contact "
+          "coverage and a cap on judgment work in a transactional hub, and none "
+          "of them says that authority over company spend has to sit inside the "
+          "company. A target operating model that wants a retained organisation "
+          "has to state that as a constraint; wanting it is not enough, and this "
+          "model was given no such constraint because the brief specified none. "
+          "The empty column is the model reporting that faithfully rather than a "
+          "recommendation to abolish the retained function.\n")
+
     w("## How much of the answer is actually decided\n")
     w(f"Each activity was barred in turn from the unit it was given, and the "
       f"model re-solved. Where the total does not move, nothing decided that "
-      f"position — several answers cost the same and a declared tie-break picked "
-      f"one.\n")
+      f"position — several units cost exactly the same and the solver returned "
+      f"one of them.\n")
     w(f"**{f['forced']} of {f['total']}** positions are decided by cost. The "
-      f"remaining **{f['tie_broken']}** are placed, not chosen, and are drawn as "
-      f"undecided rather than as a position.\n")
+      f"remaining **{f['tie_broken']}** are not chosen by anything, and the tool "
+      f"does not put them in a column at all.\n")
     priced = sorted(
         ((k, v) for k, v in f["positions"].items()
          if v["forced"] and v["cost_of_moving"] is not None),
@@ -434,8 +523,10 @@ def main() -> None:
     h, t = result["headline"], result["tipping_point"]
     print(f"headline difference share: {h['share']:.1%}")
     f = result["forced"]
+    print(f"  of the positions cost decides: "
+          f"{len(h['moved_decided'])}/{h['decided_total']} differ")
     print(f"positions decided by cost: {f['forced']}/{f['total']} "
-          f"({f['tie_broken']} placed by tie-break)")
+          f"({f['tie_broken']} the model does not place)")
     if t["price"] is not None:
         inside = "inside" if t["inside_defensible_range"] else "OUTSIDE"
         print(f"tipping point: {result['pre_registered']['currency']} "

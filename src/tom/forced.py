@@ -16,7 +16,7 @@ from concurrent.futures import ProcessPoolExecutor
 from typing import Mapping, Sequence
 
 from tom.config import load_instance
-from tom.solve import Infeasible, Scenario, solve
+from tom.solve import Infeasible, Scenario, position_is_forced, solve
 from tom.types import Instance
 
 _WORKER: dict[str, Instance] = {}
@@ -26,28 +26,15 @@ def _init() -> None:
     _WORKER["instance"] = load_instance()
 
 
-def _probe(payload: tuple[float, str, str, float]) -> tuple[float, str, bool, float | None]:
-    """Bar one activity from one unit at one price and report the cost of it."""
+def _probe(payload: tuple[float, str, str, float]) -> tuple[float, str, bool]:
+    """Bar one activity from one unit at one price and ask if the total can hold."""
     price, activity, barred_unit, reference_cost = payload
     instance = _WORKER["instance"]
-    barred = Instance(
-        activities=instance.activities,
-        locations=instance.locations,
-        edges=instance.edges,
-        units=instance.units,
-        families=instance.families,
-        settings=instance.settings,
-        bands=instance.bands,
-        barred={activity: (barred_unit,)},
+    forced = position_is_forced(
+        instance, activity, barred_unit, reference_cost,
+        Scenario(handoff_price=price),
     )
-    try:
-        alternative = solve(barred, scenario=Scenario(handoff_price=price))
-    except Infeasible:
-        return price, activity, True, None
-    delta = round(alternative.total_cost, 2) - reference_cost
-    # Half a cent, not zero: the objective is integer cents, so anything below
-    # that is rounding rather than a difference.
-    return price, activity, delta > 0.005, delta
+    return price, activity, forced
 
 
 def over_ladder(
@@ -56,7 +43,7 @@ def over_ladder(
     workers: int | None = None,
     progress: bool = True,
 ) -> dict[str, dict[str, dict]]:
-    """Returns {price_as_string: {activity: {forced, cost_of_moving}}}."""
+    """Returns {price_as_string: {activity: {forced}}}."""
     instance = load_instance()
     assignable = [a.name for a in instance.assignable]
     workers = workers or max(1, (os.cpu_count() or 4) - 1)
@@ -72,10 +59,8 @@ def over_ladder(
     }
     done = 0
     with ProcessPoolExecutor(max_workers=workers, initializer=_init) as pool:
-        for price, activity, forced, delta in pool.map(_probe, jobs, chunksize=8):
-            out[f"{price:.2f}"][activity] = {
-                "forced": forced, "cost_of_moving": delta,
-            }
+        for price, activity, forced in pool.map(_probe, jobs, chunksize=8):
+            out[f"{price:.2f}"][activity] = {"forced": forced}
             done += 1
             if progress and done % max(1, len(jobs) // 10) == 0:
                 print(f"  {done:>5,}/{len(jobs):,}", flush=True)

@@ -11,13 +11,15 @@ install:
 snapshot:
 	$(PY) scripts/snapshot_inputs.py
 
-# Two-stage work-family classification. Needs ANTHROPIC_API_KEY for stage 2;
-# `make classify-offline` runs stage 1 only and says so in the readout.
+# Two-stage work-family classification. Needs ANTHROPIC_API_KEY for stage 2.
+# `make classify-stage1` runs the ported taxonomy alone and reports how little
+# of the activity set it can decide — which is the transfer finding. It writes
+# no labels, because a defaulted label is not a classification.
 classify:
 	$(PY) -m tom.classify
 
-classify-offline:
-	$(PY) -m tom.classify --offline
+classify-stage1:
+	-$(PY) -m tom.classify --offline
 
 # Score the classifier against the hand-labelled gold set. The stability run
 # needs this: it resamples labels at the measured error rate.
@@ -29,7 +31,8 @@ eval:
 run:
 	$(PY) -m tom.report
 
-# 10,000 draws over every declared quantity. Takes about an hour on eight cores.
+# 10,000 draws over every declared quantity. 1.5 to 2 hours on eight cores.
+# Each draw is a full re-solve; nothing is interpolated.
 stability:
 	$(PY) -m tom.stability
 

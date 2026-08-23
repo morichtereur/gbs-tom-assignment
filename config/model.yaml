@@ -139,27 +139,24 @@ objective:
   # it does, that is the finding.
   handoff_cost_usd: 1.50
   defensible_range_usd: [0.25, 4.0]
-  # Many assignments cost exactly the same — a dozen activities are small
-  # enough that where they sit changes the bill by nothing at all. Without a
-  # stated preference the solver returns whichever tied optimum it happened to
-  # reach, and the answer appears to move when the reader changes the price
-  # even though nothing real changed.
+  # What one delivery unit costs to exist, per year, before anybody works in
+  # it: a lead, a reporting line, the meetings that keep it joined to the rest.
   #
-  # So a preference is declared: among assignments of equal cost, prefer the one
-  # using fewer distinct units. That is a real thing a target operating model
-  # wants — every extra unit is another interface to manage — and it is applied
-  # strictly after cost, never in place of it.
+  # Added after the first sweep, and the honest account of why is two things at
+  # once. It is defensible on its own terms — a unit is not free merely because
+  # its people are counted elsewhere. And without it the model was exactly
+  # indifferent between assignments using four units and five, so the answer
+  # moved as the coordination price was dragged with nothing real changing
+  # underneath. The first is why it is a cost line rather than a tie-break; the
+  # second is why it was noticed at all.
   #
-  # Ties survive even that, so a last one is applied: a fixed ordering of the
-  # units. It carries no meaning whatsoever and is here for one reason, which is
-  # that the same input should give the same answer twice.
-  #
-  # Together these make the answer reproducible. They do not make it certain.
-  # Which activities are genuinely pinned by cost and which are merely placed by
-  # a tie-break is measured directly — `make forced` — and reported per activity,
-  # because an arbitrary position rendered as a confident one is the failure this
-  # study is about.
-  tie_break: fewest_units_then_fixed_order
+  # It removes the indifference between four units and five. It does not
+  # remove the ties underneath that: an activity small enough that its position
+  # changes the bill by nothing is still placed rather than chosen, whatever a
+  # unit costs to exist. Those are found directly — each activity is barred in
+  # turn from the unit it was given and the model re-solved — and the tool does
+  # not draw them in a column at all.
+  unit_overhead_usd_per_year: 500
   # Self-transitions are the same activity repeating and never cross a unit.
   # Excluded from the count rather than priced at zero, so the transition total
   # in the results means what it says.

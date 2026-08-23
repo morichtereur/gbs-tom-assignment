@@ -24,7 +24,7 @@ from __future__ import annotations
 import json
 import os
 from collections import Counter, defaultdict
-from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import BrokenExecutor, ProcessPoolExecutor
 from dataclasses import dataclass
 from random import Random
 from typing import Mapping
@@ -150,18 +150,28 @@ def run(
     tally: dict[str, Counter] = defaultdict(Counter)
     infeasible = 0
     done = 0
-    with ProcessPoolExecutor(
-        max_workers=workers, initializer=_init_worker_with, initargs=(error_rates,)
-    ) as pool:
-        for outcome in pool.map(_run_draw, seeds, chunksize=16):
-            done += 1
-            if outcome is None:
-                infeasible += 1
-            else:
-                for name, unit in outcome.items():
-                    tally[name][unit] += 1
-            if progress and done % max(1, draws // 20) == 0:
-                print(f"  {done:>6,}/{draws:,}", flush=True)
+    try:
+        with ProcessPoolExecutor(
+            max_workers=workers, initializer=_init_worker_with, initargs=(error_rates,)
+        ) as pool:
+            for outcome in pool.map(_run_draw, seeds, chunksize=16):
+                done += 1
+                if outcome is None:
+                    infeasible += 1
+                else:
+                    for name, unit in outcome.items():
+                        tally[name][unit] += 1
+                if progress and done % max(1, draws // 20) == 0:
+                    print(f"  {done:>6,}/{draws:,}", flush=True)
+    except BrokenExecutor as exc:
+        # A worker pool that dies mid-run leaves the parent waiting on results
+        # that will never arrive, and the run looks like it is still going. Fail
+        # loudly and say how far it got, rather than writing a file that claims
+        # a draw count it did not reach.
+        raise RuntimeError(
+            f"the worker pool died after {done:,} of {draws:,} draws ({exc}). "
+            f"No stability file was written. Re-run, or lower `workers`."
+        ) from exc
 
     threshold = settings.stability["stable_threshold"]
     activities = {}

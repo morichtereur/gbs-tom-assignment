@@ -71,8 +71,39 @@ def test_raising_the_price_never_increases_crossings(instance):
 def test_a_zero_price_makes_the_handoff_term_vanish(instance):
     free = solve(instance, 0.0)
     assert free.handoff_cost == 0.0
-    assert free.total_cost == free.labour_cost
+    assert free.total_cost == free.labour_cost + free.overhead_cost
+
+
+def test_the_reported_total_is_the_thing_the_solver_minimised(instance, optimum):
+    # The objective charges per-unit overhead, so a total that quietly left it
+    # out would not be the number being minimised.
+    per_unit = instance.settings.objective["unit_overhead_usd_per_year"]
+    units = len({u.key for u in optimum.units.values()})
+    assert optimum.overhead_cost == pytest.approx(units * per_unit)
+    assert optimum.total_cost == pytest.approx(
+        optimum.labour_cost + optimum.handoff_cost + optimum.overhead_cost
+    )
 
 
 def test_the_solver_never_returns_a_non_optimal_status(optimum):
     assert optimum.status == "OPTIMAL"
+
+
+def test_the_fast_forced_probe_agrees_with_the_slow_one(instance, optimum):
+    """The page asks 'is this position decided' a few thousand times.
+
+    Asked as an optimisation — bar the unit, re-solve, compare totals — it needs
+    an optimality proof each time. Asked as a feasibility question — bar the
+    unit, is anything still this cheap — it does not. The two must give the same
+    answer, or the fast one is not a shortcut but a different question.
+    """
+    from tom.solve import Scenario, forced_positions, position_is_forced
+
+    scenario = Scenario(handoff_price=optimum.handoff_price)
+    slow = forced_positions(instance, scenario)
+    for activity in instance.assignable:
+        fast = position_is_forced(
+            instance, activity.name, optimum.units[activity.name].key,
+            optimum.total_cost, scenario,
+        )
+        assert fast == slow[activity.name]["forced"], activity.name

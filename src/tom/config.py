@@ -226,7 +226,19 @@ def load_families(fallback_to_gold: bool = True) -> dict[str, Family]:
         return {k: v["label"] for k, v in json.loads(path.read_text())["labels"].items()}
     if not fallback_to_gold:
         raise FileNotFoundError(f"{path} is missing. Run `make classify`.")
+    print(
+        "note: data/labels.json is missing, so the model is running on the "
+        "hand-labelled gold set instead of the classifier's output. That makes "
+        "the classifier look perfect and the resampling error rate wrong. "
+        "Run `make classify`.",
+        flush=True,
+    )
     return {a["name"]: a["family"] for a in _yaml("activities.yaml")["activities"]}
+
+
+def labels_are_classifier_output() -> bool:
+    """Whether the model is running on real classifier output or on the gold set."""
+    return (DATA / "labels.json").exists()
 
 
 def load_instance(

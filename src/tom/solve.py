@@ -1,17 +1,18 @@
 """The CP-SAT assignment model.
 
-Solution hints from a previous optimum were tried and dropped: on this
-instance they roughly doubled the solve time rather than shortening it,
-because the search is already short and the hint mostly costs propagation.
-
 One decision per activity: which (delivery model, location) unit it sits in.
-The instance is 29 activities over 24 units, which is small enough to solve to
-proven optimality in well under a second, so nothing here is a heuristic and
-nothing here is handed to a language model.
+The instance is 29 activities over 18 units — eleven cities collapsed to eight
+that the model can actually tell apart, times the delivery models each may host
+— which is small enough to solve to proven optimality in well under a second. So
+nothing here is a heuristic and nothing here is handed to a language model.
 
 Costs are carried in integer cents. CP-SAT is an integer solver, and rounding
 once at the boundary is honest in a way that rounding inside the objective is
 not.
+
+Solution hints from a previous optimum were tried and dropped: on this instance
+they roughly doubled the solve time rather than shortening it, because the
+search is already short and the hint mostly costs propagation.
 """
 
 from __future__ import annotations
@@ -24,15 +25,6 @@ from ortools.sat.python import cp_model
 from tom.types import Activity, Assignment, Instance, Location, Unit
 
 CENTS = 100
-# Three objectives in strict priority order, packed into one integer:
-#     cost (cents) >> number of units used >> a fixed unit ordering
-# The scales are chosen so a lower priority can never outrank a higher one.
-# Largest possible ordering term is 29 activities x 18 units = 522, so the
-# unit scale clears it; largest unit term is 18 x 1000, so the cost scale
-# clears that.
-ORDER_SCALE = 1
-UNIT_SCALE = 1_000
-PRIMARY_SCALE = 100_000
 # FTE is carried as hundredths so the minimum-site constraint stays integral.
 FTE_SCALE = 100
 
@@ -143,9 +135,17 @@ def _feasible_units(
 
 
 def build_model(
-    instance: Instance, scenario: Scenario
+    instance: Instance,
+    scenario: Scenario,
+    cost_ceiling_cents: int | None = None,
 ) -> tuple[cp_model.CpModel, dict, dict, dict]:
-    """Assemble the CP-SAT model. Split out so the tests can inspect it."""
+    """Assemble the CP-SAT model. Split out so the tests can inspect it.
+
+    With `cost_ceiling_cents` the model carries no objective and instead asks
+    a yes/no question: is there any assignment at or below this cost? That is
+    all the forced-position probe needs, and a feasibility question is far
+    cheaper than an optimality proof.
+    """
     s = instance.settings
     model = cp_model.CpModel()
     activities = list(instance.assignable)
@@ -288,6 +288,41 @@ def build_model(
         # cases * price for every case that crosses a boundary
         handoff_terms.append(edge.cases * price_cents * (1 - same[pair]))
 
+    # Every unit that exists is an interface somebody manages: a lead, a
+    # reporting line, a set of meetings. Charged per open unit per year and
+    # declared in config/model.yaml.
+    #
+    # It was added after the fact, and for two reasons that are worth separating.
+    # It is defensible on its own terms — a delivery unit is not free merely
+    # because its people are counted elsewhere. And without it the model is
+    # indifferent between assignments that use four units and five, so the
+    # answer moved as the reader dragged the price without anything real
+    # changing. The first reason is why it is a cost rather than a tie-break;
+    # the second is why it was noticed.
+    overhead = round(s.objective.get("unit_overhead_usd_per_year", 0.0) * CENTS)
+    used: dict[str, cp_model.IntVar] = {}
+    if overhead:
+        for unit in instance.units:
+            members = [
+                x[(a.name, unit.key)] for a in activities if (a.name, unit.key) in x
+            ]
+            if not members:
+                continue
+            flag = model.NewBoolVar(f"used[{unit.key}]")
+            # Upper link only. The overhead pushes the flag down, so the solver
+            # cannot leave it set on a unit it did not use.
+            for var in members:
+                model.Add(var <= flag)
+            used[unit.key] = flag
+
+    total = sum(labour) + sum(handoff_terms) + overhead * sum(used.values())
+    if cost_ceiling_cents is None:
+        model.Minimize(total)
+    else:
+        model.Add(total <= cost_ceiling_cents)
+
+    return model, x, same, open_site
+
     # A `used` flag per unit, for the declared tie-break. Only an upper link is
     # needed: the tie-break pushes the flags down, so the solver cannot leave a
     # flag set on a unit it did not use.
@@ -302,12 +337,20 @@ def build_model(
         used[unit.key] = flag
 
     order = {u.key: i for i, u in enumerate(instance.units)}
-    tie_break = 0
-    if s.objective.get("tie_break") == "fewest_units_then_fixed_order":
-        tie_break = UNIT_SCALE * sum(used.values()) + ORDER_SCALE * sum(
-            order[key] * var for (_, key), var in x.items()
-        )
-    model.Minimize(PRIMARY_SCALE * (sum(labour) + sum(handoff_terms)) + tie_break)
+    tie_break = UNIT_SCALE * sum(used.values()) + sum(
+        order[key] * var for (_, key), var in x.items()
+    )
+
+    # Two phases rather than one packed objective. Packing cost and tie-break
+    # into a single integer needs cost multiplied by ~10^5, and coefficients
+    # that large made proving optimality slow enough that a two-worker search
+    # hit the time limit outright — the answer was right and the model was
+    # nearly unusable. Solving cost first, pinning it, then choosing among the
+    # assignments that achieve it is the same lexicographic order with the
+    # coefficients left alone.
+    model.Minimize(cost)
+    model.__tom_cost__ = cost
+    model.__tom_tie_break__ = tie_break
 
     return model, x, same, open_site
 
@@ -373,10 +416,16 @@ def solve(
         and chosen[edge.src] != chosen[edge.dst]
     )
 
+    overhead = (
+        len({unit.key for unit in chosen.values()})
+        * s.objective.get("unit_overhead_usd_per_year", 0.0)
+    )
+
     return Assignment(
         units=chosen,
         labour_cost=labour,
         handoff_cost=crossings * scenario.handoff_price,
+        overhead_cost=overhead,
         crossings=crossings,
         status=solver.StatusName(status),
         handoff_price=scenario.handoff_price,
@@ -437,3 +486,56 @@ def forced_positions(
             "next_best_unit": alternative.units[activity.name].key,
         }
     return out
+
+
+def position_is_forced(
+    instance: Instance,
+    activity: str,
+    unit_key: str,
+    reference_cost: float,
+    scenario: Scenario,
+    *,
+    time_limit_s: float = 30.0,
+) -> bool:
+    """Does cost decide that this activity sits in this unit?
+
+    Asked as a feasibility question rather than an optimisation one: bar the
+    activity from the unit, then ask whether anything still reaches the same
+    total. If something does, the unit was one of several equally good answers
+    and nothing decided it. If nothing does, the position is worth what the gap
+    is worth.
+
+    Optimising the barred model would answer the same question and take an
+    optimality proof to do it. On the full price ladder that was the difference
+    between forty minutes and a few.
+    """
+    barred = Instance(
+        activities=instance.activities,
+        locations=instance.locations,
+        edges=instance.edges,
+        units=instance.units,
+        families=instance.families,
+        settings=instance.settings,
+        bands=instance.bands,
+        barred={activity: (unit_key,)},
+    )
+    try:
+        # A cent of slack, because the reference cost is a rounded float coming
+        # back from a solve and the ceiling is compared in integer cents.
+        model, *_ = build_model(barred, scenario, round(reference_cost * CENTS) + 1)
+    except Infeasible:
+        return True
+
+    solver = cp_model.CpSolver()
+    solver.parameters.max_time_in_seconds = time_limit_s
+    solver.parameters.num_workers = 1
+    solver.parameters.random_seed = 0
+    status = solver.Solve(model)
+    if status in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+        return False
+    if status == cp_model.INFEASIBLE:
+        return True
+    raise Infeasible(
+        f"the forced-position probe for {activity!r} did not resolve "
+        f"(CP-SAT status {solver.StatusName(status)})."
+    )

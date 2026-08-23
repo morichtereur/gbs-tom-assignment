@@ -102,6 +102,10 @@ class Assignment:
     units: Mapping[str, Unit]           # activity name -> unit
     labour_cost: float
     handoff_cost: float
+    # What the open units cost to exist, before anybody works in them. Carried
+    # separately because the objective charges it and a total that quietly
+    # excluded it would not be the number being minimised.
+    overhead_cost: float
     crossings: int                      # transitions that cross a unit boundary
     status: str
     handoff_price: float
@@ -109,7 +113,7 @@ class Assignment:
 
     @property
     def total_cost(self) -> float:
-        return self.labour_cost + self.handoff_cost
+        return self.labour_cost + self.handoff_cost + self.overhead_cost
 
     def unit_of(self, activity: str) -> Unit:
         return self.units[activity]

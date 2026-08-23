@@ -57,13 +57,20 @@ def rank_cities(instance: Instance, scenario: Scenario | None = None) -> list[tu
 
 
 def cost_ties(instance: Instance, ranked: list[tuple[str, float]]) -> list[list[str]]:
-    """Groups of cities the cost model cannot separate."""
+    """Groups of cities the cost model cannot separate.
+
+    Compared against the group's own first member rather than against its
+    predecessor, so a long chain of near-equal cities cannot drift into one
+    group a half-cent at a time.
+    """
     groups: list[list[str]] = []
+    anchors: list[float] = []
     for key, total in ranked:
-        if groups and abs(total - dict(ranked)[groups[-1][0]]) < 0.005:
+        if groups and abs(total - anchors[-1]) < 0.005:
             groups[-1].append(key)
         else:
             groups.append([key])
+            anchors.append(total)
     return [g for g in groups if len(g) > 1]
 
 
@@ -117,6 +124,10 @@ def naive_baseline(
         units=units,
         labour_cost=labour,
         handoff_cost=crossings * scenario.handoff_price,
+        overhead_cost=(
+            len({unit.key for unit in units.values()})
+            * settings.objective.get("unit_overhead_usd_per_year", 0.0)
+        ),
         crossings=crossings,
         status="BASELINE",
         handoff_price=scenario.handoff_price,
@@ -145,6 +156,7 @@ def single_city_optimum(
         ],
         families=instance.families,
         settings=instance.settings,
+        bands=instance.bands,
     )
     return solve(restricted, scenario=scenario, **kw)
 

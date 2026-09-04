@@ -234,3 +234,7 @@ not a classification.
 - **duckdb** — reading the upstream Parquet directly, in the upstream repo's venv
 - **pyyaml** — the configs, which are the method
 - **anthropic** — stage 2 of the classifier and nothing else
+
+---
+
+Built by [Moritz Richter](https://www.linkedin.com/in/moritz-richter-28297119a/) · Finance & Strategy Consultant · Zürich · [Portfolio](https://morichtereur.github.io/)
